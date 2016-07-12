@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+
+	<script src="/dist/angular.min.js"></script>
+
+	<script type="text/javascript" src="/dist/all.js"></script>
+	
+</head>
+
+<body ng-app="ProblemsTest" >
+
+	<div ng-controller="ProblemsController" style="float:left;">
+    user:<my-user enter-user="user"></my-user>
+    numposteda:<my-num-poste-da enter-num-posteda="numPosteDa"></my-num-poste-da>
+    adresseipsopra:<my-adresse-ip-sopra enter-adress-ipsopra="adresseIPSopra"></my-adresse-ip-sopra>
+	  <my-problems problems-type="problems" ondatachange="ontypechange" idvalue="problemIndex"></my-problems>
+	  <my-duree problems-type-duree="duration" setvalue="setduration"></my-duree>
+	  	duration : {{duration}}
+    <my-comment enter-new-comment="comment"></my-comment>
+    <my-button onclick="onsubmit" btn-label="Submit"></my-button>
+	</div>
+	
+</body>
+</html>

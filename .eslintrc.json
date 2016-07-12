@@ -1,0 +1,23 @@
+{
+    "globals": {
+    	"angular": true
+	},
+    "extends": "standard",
+    "installedESLint": true,
+    "plugins": [
+        "standard",
+        "promise"
+    ],
+    "rules": {
+    	"no-alert": 1,
+    	"no-console": 1,
+    	"no-debugger": 2,
+        "promise/param-names": 2,
+        "promise/always-catch": 2, // deprecated
+        "promise/catch-or-return": 2,
+        "promise/no-native": 0
+    },
+    "env":{
+    	"browser": true
+    }
+}

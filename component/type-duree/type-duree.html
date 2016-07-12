@@ -1,0 +1,10 @@
+<div>
+	<input ng-model="displaytime" ng-change="computetime()" ng-keypress="checknumber($event)"></input>
+
+	<input type="radio" ng-model="unit" value="s" name="timeunit" ng-change="computetime()">secondes</input>
+	<input type="radio" ng-model="unit" value="m" name="timeunit" ng-change="computetime()">minutes</input>
+	<input type="radio" ng-model="unit" value="h" name="timeunit" ng-change="computetime()">heures</input>
+
+	{{displaytime}}
+
+</div>
