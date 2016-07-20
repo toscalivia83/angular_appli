@@ -8,24 +8,6 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myButton', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          onclick: '=onclick',
-          label: '@btnLabel'
-        },
-        templateUrl: '/component/button/button.html'
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
   module.directive('myComment', [
     function () {
       return {
@@ -43,14 +25,41 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myNumPosteDa', [
+  module.directive('myButton', [
     function () {
+      function isNormalInteger (str) {
+        return /^\\?(0|[1-9]\d*)$/.test(str)
+      }
       return {
         restrict: 'E',
         scope: {
-          numPosteDa: '=enterNumPosteda'
+          onclick: '=onclick',
+          label: '@btnLabel'
         },
-        templateUrl: '/component/numPosteDA/numPosteDA.html'
+        templateUrl: '/component/button/button.html',
+        link: function ($scope, element, attributes) {
+          if (isNormalInteger(attributes.btnWidth) === true) {
+            var buttonFirstChild = element.children(0).children(0)
+            var btnWidth = attributes.btnWidth + 'px'
+
+            buttonFirstChild.css('width', btnWidth)
+          } else {
+            var buttonSecondChild = element.children(0).children(0)
+            buttonSecondChild.css('padding', '15px')
+            // var btnPadding = padding: 15px;
+          }
+
+          if (isNormalInteger(attributes.btnHeight) === true) {
+            var buttonFirstChild = element.children(0).children(0)
+            var btnWidth = attributes.btnHeight + 'px'
+
+            buttonFirstChild.css('height', btnWidth)
+          } else {
+            var buttonSecondChild = element.children(0).children(0)
+            buttonSecondChild.css('padding', '15px')
+            // var btnPadding = padding: 15px;
+          }
+        }
       }
     }
   ])
@@ -60,31 +69,41 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myAdresseIpSopra', [
+  module.directive('myCustomInput', [
     function () {
       return {
         restrict: 'E',
         scope: {
-          adresseIPSopra: '=enterAdressIpsopra'
+          val: '=val',
+          label: '@label'
         },
-        templateUrl: '/component/adresseIPSopra/adresseIPSopra.html'
-      }
-    }
-  ])
-})();// eslint-disable-line semi
+        templateUrl: '/component/custom-input/custom-input.html',
+        link: function($scope, elem, attributes) {
+          var inputContainer = elem.children(0)
+          var elemInput = inputContainer.children(0)
 
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
+          setTimeout(function() {
+            var value = elemInput.val()
+            if( elemInput.val() !== '' ) { // in case the input is already filled..
+              inputContainer.addClass('input--filled')
+            }
+          }, 100)
 
-  module.directive('myUser', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          user: '=enterUser'
-        },
-        templateUrl: '/component/user/user.html'
+          // events:
+          elemInput.on( 'focus', onInputFocus );
+          elemInput.on( 'blur', onInputBlur );
+
+          function onInputFocus( ev ) {
+            inputContainer.addClass('input--filled' );
+          }
+
+          function onInputBlur( ev ) {
+            var value = elemInput.val()
+            if( elemInput.val() === '' ) { // in case the input is not filled..
+              inputContainer.removeClass('input--filled' );
+            }
+          }
+        }
       }
     }
   ])
@@ -102,7 +121,33 @@
         ondatachange: '=ondatachange',
         itemId: '=idvalue'
       },
-      templateUrl: '/component/type-problem/type-problem.html'
+      templateUrl: '/component/type-problem/type-problem.html',
+      link: function($scope, elem, attributes){
+        var elemSVG = elem.children(0).children(0).children(0).children(0)
+        console.log(elemSVG)
+        console.log(elem)
+
+        setTimeout(function() {
+          var elemLi = elem.find("li")
+            var tabChecked = []
+          elemLi.on('click', function(){
+            var elemAllLiInput = elemLi.find('input')
+            for(var i=0; i<elemAllLiInput.length; i++){
+              console.log(i + ': ' + elemAllLiInput[i]['checked'])
+              tabChecked[i] = elemAllLiInput[i]['checked']
+              console.log(tab)
+              tabChecked++;
+            }
+            console.log(tabChecked)
+            console.log($scope.itemId)
+            console.log(elemAllLiInput[0]['checked'])
+            console.log(elemAllLiInput)
+          }) 
+        }, 100)
+
+        var swirl = '<path d="M49.346,46.341c-3.79-2.005,3.698-10.294,7.984-8.89 c8.713,2.852,4.352,20.922-4.901,20.269c-4.684-0.33-12.616-7.405-14.38-11.818c-2.375-5.938,7.208-11.688,11.624-13.837 c9.078-4.42,18.403-3.503,22.784,6.651c4.049,9.378,6.206,28.09-1.462,36.276c-7.091,7.567-24.673,2.277-32.357-1.079 c-11.474-5.01-24.54-19.124-21.738-32.758c3.958-19.263,28.856-28.248,46.044-23.244c20.693,6.025,22.012,36.268,16.246,52.826 c-5.267,15.118-17.03,26.26-33.603,21.938c-11.054-2.883-20.984-10.949-28.809-18.908C9.236,66.096,2.704,57.597,6.01,46.371 c3.059-10.385,12.719-20.155,20.892-26.604C40.809,8.788,58.615,1.851,75.058,12.031c9.289,5.749,16.787,16.361,18.284,27.262 c0.643,4.698,0.646,10.775-3.811,13.746" style="stroke-dasharray: 586.363, 586.363; stroke-dashoffset: 0; transition: stroke-dashoffset 0.8s ease-in 0s;"/>'
+
+      }
     }
   }])
 })();// eslint-disable-line semi
