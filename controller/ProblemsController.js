@@ -7,7 +7,7 @@
     'ProblemsService',
     'ProblemsTypeService',
     function ($scope, ProblemsService, ProblemsTypeService) {
-      var initialValue = 20
+      var initialValue = 2
       $scope.problemType
       $scope.duration
       $scope.comment
@@ -20,6 +20,7 @@
       $scope.date = Date.now()
 
       ProblemsTypeService.getProblems().then(function (problems) {
+        debugger
         $scope.problems = problems
         $scope.problemIndex = initialValue
         $scope.problemType = $scope.problems[initialValue].typeProbleme
@@ -51,14 +52,21 @@
           adresseIPSopra: $scope.adresseIPSopra,
           date: $scope.date
         }
-        ProblemsService.createProblem(objectToSend)
-        .then(function (problems) {
-          alert('Well inserted')
-        })
-        .catch(function (err) {
-          alert('Erreur')
-          console.log(err)
-        })
+        $scope.start()
+
+        setTimeout(function () {
+          ProblemsService
+          .createProblem(objectToSend)
+          .then(function (problems) {
+            $scope.stop()
+            alert('Well inserted')
+          })
+          .catch(function (err) {
+            $scope.stop()
+            alert('Erreur')
+            console.log(err)
+          })
+        }, 5000)
       }
     }
   ])

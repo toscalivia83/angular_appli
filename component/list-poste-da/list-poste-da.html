@@ -1,0 +1,9 @@
+<div>
+  <ul>
+    <li ng-repeat="x in postesDa">
+      <input type="radio" ng-click="ondelete(x)" name="posteDa" id="{{$index}}" ng-value="$index" ng-model="itemId">
+      <label for="{{$index}}">Poste Da : {{x.numPosteDA}}</label>
+    </li>
+  </ul>
+</div>
+

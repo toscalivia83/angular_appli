@@ -1,5 +1,5 @@
-<span class="input input--juro">
-  <input type="text" class="input__field input__field--juro" ng-model="val">
+<span class="input input--juro" ng-class={'input--filled':val}>
+  <input type="text" class="input__field input__field--juro" ng-model="val" ng-change="fct(val)"/>
   <label class="input__label input__label--juro">
     <span class="input__label-content input__label-content--juro">{{label}}</span>
   </label>

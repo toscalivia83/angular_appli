@@ -1,0 +1,25 @@
+<div class="input-duration">
+  <my-custom-input val="displaytime" label="{{'PROBLEM-DURATION' | translate}}" fct="computetime" ng-keypress="checknumber($event)"></my-custom-input>
+
+  <div class="duration-radio__container" ng-class="unit">
+    <ul>
+      <li>
+        <input type="radio" ng-model="unit" id="{{ 'SECONDS-UNIT' | translate }}" value="{{ 'SECONDS-UNIT' | translate }}" name="timeunit" ng-change="computetime(displaytime)"/>
+        <label for="{{ 'SECONDS-UNIT' | translate }}">{{ 'SECONDS-DURATION' | translate }}</label> 
+        <div class="check"></div>
+      </li></br>
+      <li>
+        <input type="radio" ng-model="unit" id="{{ 'MINUTES-UNIT' | translate }}" value="{{ 'MINUTES-UNIT' | translate }}" name="timeunit" ng-change="computetime(displaytime)"/>
+        <label for="{{ 'MINUTES-UNIT' | translate }}">{{ 'MINUTES-DURATION' | translate }}</label> 
+        <div class="check"></div>
+      </li></br>
+      <li>
+        <input type="radio" ng-model="unit" id="{{ 'HOURS-UNIT' | translate }}" value="{{ 'HOURS-UNIT' | translate }}" name="timeunit" ng-change="computetime(displaytime)"/>
+        <label for="{{ 'HOURS-UNIT' | translate }}">{{ 'HOURS-DURATION' | translate }}</label> 
+        <div class="check"></div>
+      </li>
+    </ul>
+
+  </div>
+
+</div>

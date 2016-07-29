@@ -2,7 +2,7 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myProblems', ['configMessages', function (configMessages) {
+  module.directive('myRadiolistProblems', ['configMessages', function (configMessages) {
     return {
       restrict: 'E',
       scope: {
@@ -10,7 +10,7 @@
         ondatachange: '=ondatachange',
         itemId: '=idvalue'
       },
-      templateUrl: '/component/type-problem/type-problem.html'
+      templateUrl: '/component/radiolist-problems/radiolist-problems.html'
     }
   }])
 })();// eslint-disable-line semi

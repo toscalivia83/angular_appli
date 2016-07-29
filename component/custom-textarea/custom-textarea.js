@@ -2,37 +2,35 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myButton', ['CheckNumberService',
+  module.directive('myCustomTextarea', ['CheckNumberService',
     function (CheckNumberService) {
       return {
         restrict: 'E',
         scope: {
-          onclick: '=onclick',
-          label: '@btnLabel'
+          val: '=val',
+          label: '@label',
+          fct: '=fct'
         },
-        controller: ['$scope', function ($scope) {
-
-        }],
-        templateUrl: '/component/button/button.html',
+        templateUrl: '/component/custom-textarea/custom-textarea.html',
         link: function ($scope, element, attributes) {
           if (CheckNumberService.isNormalInteger(attributes.btnWidth) === true) {
-            var buttonFirstChild = element.children(0).children(0)
+            var buttonFirstChild = element.children(0)
             var btnWidth = attributes.btnWidth + 'px'
 
             buttonFirstChild.css('width', btnWidth)
           } else {
-            var buttonSecondChild = element.children(0).children(0)
-            buttonSecondChild.css('padding', '15px')
+            var buttonSecondChild = element.children(0)
+            buttonSecondChild.css('width', '350px')
           }
 
           if (CheckNumberService.isNormalInteger(attributes.btnHeight) === true) {
-            var buttonFirstChildHeight = element.children(0).children(0)
+            var buttonFirstChildHeight = element.children(0)
             var btnHeight = attributes.btnHeight + 'px'
 
             buttonFirstChildHeight.css('height', btnHeight)
           } else {
-            var buttonSecondChildHeight = element.children(0).children(0)
-            buttonSecondChildHeight.css('padding', '15px')
+            var buttonSecondChildHeight = element.children(0)
+            buttonSecondChildHeight.css('height', '150px')
           }
         }
       }

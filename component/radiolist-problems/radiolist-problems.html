@@ -1,0 +1,10 @@
+<div class="container problems">
+  <ul>
+    <li ng-repeat="x in problems">
+      <input type="radio" ng-click="ondatachange(x)" name="typeProblem" id="{{$index}}" ng-value="$index" ng-model="itemId">
+      <label for="{{$index}}">Probleme : {{x.typeProbleme}}</label> 
+      <div class="check"></div>
+    </li>
+  </ul>
+</div>
+

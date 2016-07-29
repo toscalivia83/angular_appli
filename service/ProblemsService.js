@@ -8,11 +8,10 @@
     'serverConnexion',
     function ($q, $http, serverConnexion) {
       var ressourceNameCreateProblem = 'problems'
-      var apiUrlCreateProblems = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameCreateProblem
-
+      var apiUrlProblems = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameCreateProblem
       this.createProblem = function (data) {
         var deferred = $q.defer()
-        $http.post(apiUrlCreateProblems, data)
+        $http.post(apiUrlProblems, data)
           .then(function (httpInfo) {
             deferred.resolve(httpInfo.data)
           })
@@ -24,4 +23,3 @@
     }
   ])
 })();// eslint-disable-line no-alert, quotes, semi
-

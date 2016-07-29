@@ -7,11 +7,12 @@
     '$http',
     'serverConnexion',
     function ($q, $http, serverConnexion) {
+      debugger
       var ressourceNameGetProblems = 'problemsTypes'
-      var apiUrlGetProblems = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameGetProblems
+      var apiUrlTypeProblems = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameGetProblems
       this.getProblems = function () {
         var deferred = $q.defer()
-        $http.get(apiUrlGetProblems)
+        $http.get(apiUrlTypeProblems)
           .then(function (httpInfo) {
             deferred.resolve(httpInfo.data)
           })

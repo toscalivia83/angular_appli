@@ -2,7 +2,7 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myDuree', [
+  module.directive('myDuration', [
     function () {
       return {
         restrict: 'E',
@@ -16,8 +16,8 @@
             $scope.displaytime = TimeService.computeDisplayTime(duration, $scope.unit)
           }
 
-          $scope.computetime = function () {
-            $scope.duration = TimeService.convertInMs($scope.displaytime, $scope.unit)
+          $scope.computetime = function (value) {
+            $scope.duration = TimeService.convertInMs(value, $scope.unit)
             return $scope.duration
           }
 
@@ -27,7 +27,7 @@
             }
           }
         }],
-        templateUrl: '/component/type-duree/type-duree.html'
+        templateUrl: '/component/input-duration/input-duration.html'
       }
     }
   ])

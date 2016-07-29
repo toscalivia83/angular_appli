@@ -1,0 +1,65 @@
+.duration-radio__container {
+  transition: .5s;
+  display:inline-block;
+
+  &.s {
+    transform: translate3d(0,35px,0);
+  }
+  &.m {
+    transform: translate3d(0,-15px,0);
+  }
+  &.h {
+    transform: translate3d(0,-65px,0);
+  }
+
+  ul {
+    margin-top:-25px;
+  }
+
+  ul li {
+    height:55px;
+  }
+}
+
+div label {
+  font-size: 1.25em;
+  color: #aaa;
+}
+
+div label input {
+  visibility: hidden;
+}
+
+input[type="radio"]:checked {
+    color: #fff;
+}
+
+.check {
+  border: 5px solid #aaa;
+  border-radius: 100%;
+  display: block;
+  height: 25px;
+  left: 20px;
+  position: absolute;
+  top: 30px;
+  transition: border 0.25s linear 0s;
+  width: 25px;
+  z-index: 5;
+}
+
+.check::before {
+    border-radius: 100%;
+    display: block;
+    height: 15px;
+    left: 5px;
+    margin: auto;
+    position: absolute;
+    top: 5px;
+    transition: background 0.25s linear 0s;
+    width: 15px;
+}
+
+.input-duration {
+  width:1230px; 
+  height:200px;
+}
