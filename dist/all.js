@@ -104,68 +104,6 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myHeader', [
-    function () {
-      return {
-        restrict: 'E',
-        templateUrl: 'component/header/header.html',
-        scope: {
-          headerTitle: '@headerTitle',
-          firstButtonLabel: '@firstButtonLabel',
-          secondButtonLabel: '@secondButtonLabel',
-          thirdButtonLabel: '@thirdButtonLabel',
-          pathHeader: '@pathHeader'
-        },
-        controller: ['$scope', '$location', 'serverConnexion', function ($scope, $location, serverConnexion) {
-          var ressourceNameRetrieveCsv = 'CSV'
-          $scope.csvUrl = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameRetrieveCsv
-          //$scope.val = true
-          /*$scope.changepage = function () {
-            console.log($location)
-            $location.path($scope.pathHeader)
-            debugger
-            if($scope.pathHeader === '/'){
-              $scope.val === true
-            }
-            else{
-              $scope.val === false
-            }
-          }*/
-          $scope.valposteda = false
-          $scope.valproblems = false
-         // var vallistproblems = ''
-          // var valallproblems = ''
-          // $scope.setcolor = function(){
-            // debugger
-          if ($location.path() === '/poste-da') {
-            $scope.valposteda = true
-          }
-            /* if ($location.path() === '/all-problems') {
-              valallproblems = true
-            }*/
-          if ($location.path() === '/') {
-            $scope.valproblems = true
-          }
-            /* if ($location.path() === '/all-problems') {
-              valallproblems = true
-            }*/
-           // console.log(vallistproblems)
-          // console.log(valallproblems)
-          // }
-          // if($location.path)
-        }],
-        link: function ($scope, element, attributes) {
-
-        }
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
   module.directive('myCustomTextarea', ['CheckNumberService',
     function (CheckNumberService) {
       return {
@@ -206,6 +144,48 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
+  module.directive('myHeader', [
+    function () {
+      return {
+        restrict: 'E',
+        templateUrl: 'component/header/header.html',
+        scope: {
+          headerTitle: '@headerTitle',
+          pathHeader: '@pathHeader'
+        },
+        controller: ['$scope', '$location', 'serverConnexion', function ($scope, $location, serverConnexion) {
+          var ressourceNameRetrieveCsv = 'CSV'
+          $scope.csvUrl = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameRetrieveCsv
+          $scope.valposteda = false
+          $scope.valproblems = false
+          $scope.valcsv = false
+          if ($location.path() === '/poste-da') {
+            $scope.valposteda = true
+          }
+            /* if ($location.path() === '/all-problems') {
+              valallproblems = true
+            }*/
+          if ($location.path() === '/') {
+            $scope.valproblems = true
+          }
+            /* if ($location.path() === '/all-problems') {
+              valallproblems = true
+            }*/
+          // }
+          // if($location.path)
+        }],
+        link: function ($scope, element, attributes) {
+
+        }
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
   module.directive('myHeaderLink', [
     function () {
       return {
@@ -219,6 +199,43 @@
       }
     }
   ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myInputPosteDa', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          fct: '=fct'
+        },
+        templateUrl: '/component/input-poste-da/input-poste-da.html',
+        controller: function ($scope) {
+        }
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myPostesDa', [function () {
+    return {
+      restrict: 'E',
+      scope: {
+        postesDa: '=postesDa',
+        ondelete: '=ondelete',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/list-poste-da/list-poste-da.html'
+    }
+  }])
 })();// eslint-disable-line semi
 
 (function () {
@@ -254,23 +271,6 @@
       }
     }
   ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myPostesDa', [function () {
-    return {
-      restrict: 'E',
-      scope: {
-        postesDa: '=postesDa',
-        ondelete: '=ondelete',
-        itemId: '=idvalue'
-      },
-      templateUrl: '/component/list-poste-da/list-poste-da.html'
-    }
-  }])
 })();// eslint-disable-line semi
 
 (function () {
@@ -1881,26 +1881,6 @@
       templateUrl: '/component/radiolist-problems/radiolist-problems.html'
     }
   }])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myInputPosteDa', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          val: '=val',
-          fct: '=fct'
-        },
-        templateUrl: '/component/input-poste-da/input-poste-da.html',
-        controller: function ($scope) {
-        }
-      }
-    }
-  ])
 })();// eslint-disable-line semi
 
 (function () {
