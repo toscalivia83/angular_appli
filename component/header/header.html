@@ -1,4 +1,8 @@
-<header>
-  <div class="header">{{ headerTitle }}</div>
-  <a ng-href="csvUrl">Export CSV</a>
+<header class="custom-header">
+  <div class="custom-header_title">{{ headerTitle }}</div>
+  <div class="menu-vertical">
+    <my-header-link val="valproblems" label="PROBLEMS" url="http://localhost:3000/#/" class="inactive"></my-header-link>
+    <my-header-link val="valposteda" label="POSTES DA" url="http://localhost:3000/#/poste-da" class="inactive"></my-header-link>
+  </div>
+
 </header>

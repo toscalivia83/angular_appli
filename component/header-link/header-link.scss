@@ -1,0 +1,11 @@
+.header__header-link:hover, .header__header-link:focus {
+    background: #16a085;
+}
+.header__header-link {
+    text-decoration: none;
+    display: inline-block;
+    width: auto;
+    padding: 8px 20px;
+    color: #FFF;
+    transition: all .3s;
+}

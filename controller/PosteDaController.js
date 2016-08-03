@@ -22,20 +22,19 @@
         var objectToSend = {
           numPosteDA: $scope.numPosteDa
         }
-        $scope.start()
-        setTimeout(function () {
-          PosteDaService.createPosteDa(objectToSend)
-          .then(function (problems) {
-            $scope.stop()
-            alert('Well inserted')
-            location.reload()
-          })
-          .catch(function (err) {
-            $scope.stop()
-            alert('Erreur')
-            console.log(err)
-          })
-        }, 5000)
+        if (objectToSend.numPosteDA === undefined) {
+          alert('Veuillez remplir le numéro de poste Dassault')
+          return
+        }
+        PosteDaService.createPosteDa(objectToSend)
+        .then(function (posteDa) {
+          alert('Well inserted')
+          $scope.postesDa.push(objectToSend)
+        })
+        .catch(function (err) {
+          alert('Erreur')
+          console.log(err)
+        })
       }
 
       $scope.ondelete = function (type) {
@@ -55,7 +54,7 @@
             alert('Erreur')
             console.log(err)
           })
-        }, 5000)
+        }, 3000)
       }
 
       $scope.goToRacePage = function () {

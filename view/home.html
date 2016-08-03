@@ -1,9 +1,10 @@
-<my-header header-title="{{ 'PROBLEMS-TITLE' | translate }}"></my-header>
+<my-header header-title="{{ 'PROBLEMS-TITLE' | translate }}" first-button-label="{{ 'POSTES-DA-TITLE' | translate }}" second-button-label="{{ 'PROBLEMS-TYPE-TITLE' | translate }}" path-header="{{'PATH-POSTE-DA' | translate }}"></my-header>
 <my-custom-input val="user" label="{{'PROBLEM-USER' | translate}}"></my-custom-input>
-<my-custom-input val="numPosteDa" label="{{'PROBLEM-NUM-POSTE-DA' | translate}}"></my-custom-input>
+<!-- <my-custom-input val="numPosteDa" label="{{'PROBLEM-NUM-POSTE-DA' | translate}}"></my-custom-input> -->
+<my-combobox-poste-da postes-da="postesDa" val="numPosteDa" label="{{'PROBLEM-NUM-POSTE-DA' | translate}}"></my-combobox-poste-da>
 <my-custom-input val="adresseIPSopra" label="{{'PROBLEM-ADRESS-IP' | translate}}"></my-custom-input>
 <my-radiolist-problems problems-type="problems" ondatachange="ontypechange" idvalue="problemIndex"></my-radiolist-problems>
 <my-duration problems-type-duree="duration" setvalue="setduration"></my-duration>
-<my-custom-textarea val="comment" label="{{'PROBLEM-COMMENT' | translate}}" btn-width="" btn-height="" class="block"></my-custom-textarea>
+<my-custom-textarea val="comment" label="{{'PROBLEM-COMMENT' | translate}}" btn-width="500" btn-height="" class="block"></my-custom-textarea>
 <my-button onclick="onsubmit" btn-label="Submit" btn-width="" btn-height="" class="block"></my-button>
 <my-loader start="start" stop="stop"></my-loader>

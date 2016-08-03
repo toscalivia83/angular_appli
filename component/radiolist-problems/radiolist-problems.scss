@@ -20,7 +20,6 @@ ul li{
   position: relative;
   float: left;
   width: 100%;
-  height: 100px;
 }
 
 ul li input[type=radio]{
@@ -32,13 +31,15 @@ ul li label{
   display: block;
   position: relative;
   font-weight: 300;
-  font-size: 1.35em;
+  font-size: 1.25em;
   padding: 25px 25px 25px 80px;
   margin: 10px auto;
   height: 30px;
   z-index: 9;
   cursor: pointer;
-  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+  width: 700px;
+  float: left;
 }
 
 ul li:hover label{

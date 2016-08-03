@@ -1,20 +1,8 @@
-.button {
-  float: left;
-  display: block;
-  padding: 1em 2em;
-  border: none;
-  background: none;
-  color: inherit;
-  vertical-align: middle;
-  position: relative;
-  z-index: 1;
-}
-
-.button:focus {
+.button--ujarak:focus {
   outline: none;
 }
 
-.button > span {
+.button--ujarak > span {
   vertical-align: middle;
 }
 
@@ -25,6 +13,15 @@
 
 /* Ujarak */
 .button--ujarak {
+  float: left;
+  display: block;
+  padding: 1em 2em;
+  border: none;
+  background: none;
+  color: inherit;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
   transition: border-color 0.4s, color 0.4s;
 }
 .button--ujarak::before {
@@ -69,12 +66,8 @@
 }
 
 .button--text-upper {
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-}
-
-.button--size-s {
-  font-size: 14px;
 }
 
 .button--text-thick {

@@ -2,7 +2,7 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.controller('ProblemsController', [
+  module.controller('AllProblemsController', [
     '$scope',
     'ProblemsService',
     'ProblemsTypeService',
@@ -15,30 +15,21 @@
       $scope.problemId
       $scope.comment
       $scope.user
-      $scope.numPosteDa
-      $scope.postesDa = []
+      $scope.numPosteDa = []
       $scope.adresseIPSopra
       $scope.problems = []
       $scope.date = Date.now()
 
-      ProblemsTypeService.getProblemsType().then(function (problems) {
+      ProblemsService.getAllProblems().then(function (problems) {
         $scope.problems = problems
         $scope.problemIndex = initialValue
         $scope.problemType = $scope.problems[initialValue].typeProbleme
         $scope.duration = $scope.problems[initialValue].duree
-        $scope.setduration($scope.duration)
+        //$scope.setduration($scope.duration)
         $scope.comment = ''
         $scope.user = ''
         $scope.numPosteDa = ''
         $scope.adresseIPSopra = '172.50.3.54'
-
-        return PosteDaService.getPostesDa()  
-      })
-      .catch(function (err) {
-        alert('Erreur')
-        console.log(err)
-      }).then(function (posteDa) {
-        $scope.postesDa = posteDa
       })
       .catch(function (err) {
         alert('Erreur')
@@ -52,13 +43,12 @@
       }
 
       $scope.onsubmit = function () {
-        console.log($scope.numPosteDa)
         var objectToSend = {
           typeProbleme: $scope.problemType,
           duree: $scope.duration,
           commentaire: $scope.comment,
           user: $scope.user,
-          numPosteDA: ($scope.numPosteDa).numPosteDA,
+          numPosteDA: $scope.numPosteDa,
           adresseIPSopra: $scope.adresseIPSopra,
           date: $scope.date
         }

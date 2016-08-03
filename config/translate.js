@@ -1,13 +1,17 @@
-(function() {
-  'use strict';
-  var module = angular.module('ProblemsTest');
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
 
   module.config(['$translateProvider', function ($translateProvider) {
     $translateProvider.translations('fr', {
-      'HOME-MESSAGE': "",
+      'HOME-MESSAGE': '',
 
-      'PROBLEMS-TITLE': "Ajouter un problème",
-      'POSTES-DA-TITLE': "Gérer les postes Dassault",
+      'PROBLEMS-TITLE': 'Ajouter un problème',
+      'PROBLEMS-TYPE-TITLE': 'Ajouter un type de problème',
+      'POSTES-DA-TITLE': 'Gérer les postes Dassault',
+
+      'PATH-POSTE-DA': '/poste-da',
+      'PATH-PROBLEMS': '/',
 
       'SECONDS-UNIT': 's',
       'MINUTES-UNIT': 'm',
@@ -23,11 +27,13 @@
       'PROBLEM-DURATION': 'Durée',
       'PROBLEM-COMMENT': 'Commentaires',
 
-      'FOOTER-MESSAGE': "© 2016 Repertoire de problèmes - Marion Gourlaouen"
-    });
+      'SUCCESS-MESSAGE': 'Ajouté !',
+      'ERROR-MESSAGE-VOID-POSTE': 'Veuillez remplir le numéro de poste Dassault',
 
-    $translateProvider.preferredLanguage('fr');
-    $translateProvider.useSanitizeValueStrategy('escape');
-  }]);
+      'FOOTER-MESSAGE': '© 2016 Repertoire de problèmes - Marion Gourlaouen'
+    })
 
-})();
+    $translateProvider.preferredLanguage('fr')
+    $translateProvider.useSanitizeValueStrategy('escape')
+  }])
+})();// eslint-disable-line semi

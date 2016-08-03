@@ -8,25 +8,6 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myCustomInput', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          val: '=val',
-          label: '@label',
-          fct: '=fct'
-        },
-        templateUrl: '/component/custom-input/custom-input.html'
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
   module.directive('myButton', ['CheckNumberService',
     function (CheckNumberService) {
       return {
@@ -86,50 +67,34 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myDuration', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          duration: '=problemsTypeDuree',
-          setvalue: '=setvalue'
-        },
-        controller: ['$scope', 'TimeService', function ($scope, TimeService) {
-          $scope.setvalue = function (duration) {
-            $scope.unit = TimeService.getTimeUnit(duration)
-            $scope.displaytime = TimeService.computeDisplayTime(duration, $scope.unit)
-          }
-
-          $scope.computetime = function (value) {
-            $scope.duration = TimeService.convertInMs(value, $scope.unit)
-            return $scope.duration
-          }
-
-          $scope.checknumber = function (e) {
-            if (!TimeService.keyisvalid(e.key)) {
-              e.preventDefault()
-            }
-          }
-        }],
-        templateUrl: '/component/input-duration/input-duration.html'
-      }
+  module.directive('myComboboxPosteDa', [function () {
+    return {
+      restrict: 'E',
+      scope: {
+        postesDa: '=postesDa',
+        label: '@label',
+        val: '=val'
+      },
+      templateUrl: '/component/combobox/combobox.html'
     }
-  ])
+  }])
 })();// eslint-disable-line semi
+
 
 (function () {
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myInputPosteDa', [
+  module.directive('myCustomInput', [
     function () {
       return {
         restrict: 'E',
         scope: {
           val: '=val',
+          label: '@label',
           fct: '=fct'
         },
-        templateUrl: '/component/input-poste-da/input-poste-da.html'
+        templateUrl: '/component/custom-input/custom-input.html'
       }
     }
   ])
@@ -145,13 +110,53 @@
         restrict: 'E',
         templateUrl: 'component/header/header.html',
         scope: {
-          headerTitle: '@headerTitle'
+          headerTitle: '@headerTitle',
+          firstButtonLabel: '@firstButtonLabel',
+          secondButtonLabel: '@secondButtonLabel',
+          thirdButtonLabel: '@thirdButtonLabel',
+          pathHeader: '@pathHeader'
         },
         controller: ['$scope', '$location', 'serverConnexion', function ($scope, $location, serverConnexion) {
           var ressourceNameRetrieveCsv = 'CSV'
           $scope.csvUrl = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameRetrieveCsv
+          //$scope.val = true
+          /*$scope.changepage = function () {
+            console.log($location)
+            $location.path($scope.pathHeader)
+            debugger
+            if($scope.pathHeader === '/'){
+              $scope.val === true
+            }
+            else{
+              $scope.val === false
+            }
+          }*/
+          $scope.valposteda = false
+          $scope.valproblems = false
+         // var vallistproblems = ''
+          // var valallproblems = ''
+          // $scope.setcolor = function(){
+            // debugger
+          if ($location.path() === '/poste-da') {
+            $scope.valposteda = true
+          }
+            /* if ($location.path() === '/all-problems') {
+              valallproblems = true
+            }*/
+          if ($location.path() === '/') {
+            $scope.valproblems = true
+          }
+            /* if ($location.path() === '/all-problems') {
+              valallproblems = true
+            }*/
+           // console.log(vallistproblems)
+          // console.log(valallproblems)
+          // }
+          // if($location.path)
+        }],
+        link: function ($scope, element, attributes) {
 
-        }]
+        }
       }
     }
   ])
@@ -195,6 +200,77 @@
       }
     }
   ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myHeaderLink', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          url: '@url'
+        },
+        templateUrl: '/component/header-link/header-link.html'
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myDuration', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          duration: '=problemsTypeDuree',
+          setvalue: '=setvalue'
+        },
+        controller: ['$scope', 'TimeService', function ($scope, TimeService) {
+          $scope.setvalue = function (duration) {
+            $scope.unit = TimeService.getTimeUnit(duration)
+            $scope.displaytime = TimeService.computeDisplayTime(duration, $scope.unit)
+          }
+
+          $scope.computetime = function (value) {
+            $scope.duration = TimeService.convertInMs(value, $scope.unit)
+            return $scope.duration
+          }
+
+          $scope.checknumber = function (e) {
+            if (!TimeService.keyisvalid(e.key)) {
+              e.preventDefault()
+            }
+          }
+        }],
+        templateUrl: '/component/input-duration/input-duration.html'
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myPostesDa', [function () {
+    return {
+      restrict: 'E',
+      scope: {
+        postesDa: '=postesDa',
+        ondelete: '=ondelete',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/list-poste-da/list-poste-da.html'
+    }
+  }])
 })();// eslint-disable-line semi
 
 (function () {
@@ -1794,23 +1870,6 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myPostesDa', [function () {
-    return {
-      restrict: 'E',
-      scope: {
-        postesDa: '=postesDa',
-        ondelete: '=ondelete',
-        itemId: '=idvalue'
-      },
-      templateUrl: '/component/list-poste-da/list-poste-da.html'
-    }
-  }])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
   module.directive('myRadiolistProblems', ['configMessages', function (configMessages) {
     return {
       restrict: 'E',
@@ -1822,6 +1881,26 @@
       templateUrl: '/component/radiolist-problems/radiolist-problems.html'
     }
   }])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myInputPosteDa', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          fct: '=fct'
+        },
+        templateUrl: '/component/input-poste-da/input-poste-da.html',
+        controller: function ($scope) {
+        }
+      }
+    }
+  ])
 })();// eslint-disable-line semi
 
 (function () {
@@ -1865,22 +1944,34 @@
         templateUrl: 'view/poste-da.html',
         controller: 'PosteDaController'
       })
+      .when('/types-problems', {
+        templateUrl: 'view/types-problems.html',
+        controller: 'ProblemsTypeController'
+      })
+      .when('/all-problems', {
+        templateUrl: 'view/all-problems.html',
+        controller: 'AllProblemsController'
+      })
       .otherwise({
         redirectTo: '/'
       })
   }])
 })();// eslint-disable-line semi
 
-(function() {
-  'use strict';
-  var module = angular.module('ProblemsTest');
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
 
   module.config(['$translateProvider', function ($translateProvider) {
     $translateProvider.translations('fr', {
-      'HOME-MESSAGE': "",
+      'HOME-MESSAGE': '',
 
-      'PROBLEMS-TITLE': "Ajouter un problème",
-      'POSTES-DA-TITLE': "Gérer les postes Dassault",
+      'PROBLEMS-TITLE': 'Ajouter un problème',
+      'PROBLEMS-TYPE-TITLE': 'Ajouter un type de problème',
+      'POSTES-DA-TITLE': 'Gérer les postes Dassault',
+
+      'PATH-POSTE-DA': '/poste-da',
+      'PATH-PROBLEMS': '/',
 
       'SECONDS-UNIT': 's',
       'MINUTES-UNIT': 'm',
@@ -1896,91 +1987,27 @@
       'PROBLEM-DURATION': 'Durée',
       'PROBLEM-COMMENT': 'Commentaires',
 
-      'FOOTER-MESSAGE': "© 2016 Repertoire de problèmes - Marion Gourlaouen"
-    });
+      'SUCCESS-MESSAGE': 'Ajouté !',
+      'ERROR-MESSAGE-VOID-POSTE': 'Veuillez remplir le numéro de poste Dassault',
 
-    $translateProvider.preferredLanguage('fr');
-    $translateProvider.useSanitizeValueStrategy('escape');
-  }]);
+      'FOOTER-MESSAGE': '© 2016 Repertoire de problèmes - Marion Gourlaouen'
+    })
 
-})();
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.controller('PosteDaController', [
-    '$scope',
-    '$location',
-    'PosteDaService',
-    function ($scope, $location, PosteDaService) {
-      $scope.postesDa = []
-      $scope.numPosteDa
-
-      PosteDaService.getPostesDa().then(function (posteDa) {
-        $scope.postesDa = posteDa
-      })
-      .catch(function (err) {
-        alert('Erreur')
-        console.log(err)
-      })
-
-      $scope.oncreate = function () {
-        var objectToSend = {
-          numPosteDA: $scope.numPosteDa
-        }
-        $scope.start()
-        setTimeout(function () {
-          PosteDaService.createPosteDa(objectToSend)
-          .then(function (problems) {
-            $scope.stop()
-            alert('Well inserted')
-            location.reload()
-          })
-          .catch(function (err) {
-            $scope.stop()
-            alert('Erreur')
-            console.log(err)
-          })
-        }, 5000)
-      }
-
-      $scope.ondelete = function (type) {
-        var objectToDelete = {
-          numPosteDA: type.numPosteDA,
-          id: type.id
-        }
-        $scope.start()
-        setTimeout(function () {
-          PosteDaService.deletePosteDa(objectToDelete).then(function (posteDa) {
-            $scope.stop()
-            alert('Well deleted')
-            location.reload()
-          })
-          .catch(function (err) {
-            $scope.stop()
-            alert('Erreur')
-            console.log(err)
-          })
-        }, 5000)
-      }
-
-      $scope.goToRacePage = function () {
-        $location.path('/poste-da')
-      }
-    }
-  ])
+    $translateProvider.preferredLanguage('fr')
+    $translateProvider.useSanitizeValueStrategy('escape')
+  }])
 })();// eslint-disable-line semi
 
 (function () {
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.controller('ProblemsController', [
+  module.controller('AllProblemsController', [
     '$scope',
     'ProblemsService',
     'ProblemsTypeService',
-    function ($scope, ProblemsService, ProblemsTypeService) {
+    'PosteDaService',
+    function ($scope, ProblemsService, ProblemsTypeService, PosteDaService) {
       var initialValue = 2
       $scope.problemType
       $scope.duration
@@ -1988,18 +2015,17 @@
       $scope.problemId
       $scope.comment
       $scope.user
-      $scope.numPosteDa
+      $scope.numPosteDa = []
       $scope.adresseIPSopra
       $scope.problems = []
       $scope.date = Date.now()
 
-      ProblemsTypeService.getProblems().then(function (problems) {
-        debugger
+      ProblemsService.getAllProblems().then(function (problems) {
         $scope.problems = problems
         $scope.problemIndex = initialValue
         $scope.problemType = $scope.problems[initialValue].typeProbleme
         $scope.duration = $scope.problems[initialValue].duree
-        $scope.setduration($scope.duration)
+        //$scope.setduration($scope.duration)
         $scope.comment = ''
         $scope.user = ''
         $scope.numPosteDa = ''
@@ -2042,6 +2068,214 @@
           })
         }, 5000)
       }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.controller('PosteDaController', [
+    '$scope',
+    '$location',
+    'PosteDaService',
+    function ($scope, $location, PosteDaService) {
+      $scope.postesDa = []
+      $scope.numPosteDa
+
+      PosteDaService.getPostesDa().then(function (posteDa) {
+        $scope.postesDa = posteDa
+      })
+      .catch(function (err) {
+        alert('Erreur')
+        console.log(err)
+      })
+
+      $scope.oncreate = function () {
+        var objectToSend = {
+          numPosteDA: $scope.numPosteDa
+        }
+        if (objectToSend.numPosteDA === undefined) {
+          alert('Veuillez remplir le numéro de poste Dassault')
+          return
+        }
+        PosteDaService.createPosteDa(objectToSend)
+        .then(function (posteDa) {
+          alert('Well inserted')
+          $scope.postesDa.push(objectToSend)
+        })
+        .catch(function (err) {
+          alert('Erreur')
+          console.log(err)
+        })
+      }
+
+      $scope.ondelete = function (type) {
+        var objectToDelete = {
+          numPosteDA: type.numPosteDA,
+          id: type.id
+        }
+        $scope.start()
+        setTimeout(function () {
+          PosteDaService.deletePosteDa(objectToDelete).then(function (posteDa) {
+            $scope.stop()
+            alert('Well deleted')
+            location.reload()
+          })
+          .catch(function (err) {
+            $scope.stop()
+            alert('Erreur')
+            console.log(err)
+          })
+        }, 3000)
+      }
+
+      $scope.goToRacePage = function () {
+        $location.path('/poste-da')
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.controller('ProblemsController', [
+    '$scope',
+    'ProblemsService',
+    'ProblemsTypeService',
+    'PosteDaService',
+    function ($scope, ProblemsService, ProblemsTypeService, PosteDaService) {
+      var initialValue = 2
+      $scope.problemType
+      $scope.duration
+      $scope.comment
+      $scope.problemId
+      $scope.comment
+      $scope.user
+      $scope.numPosteDa
+      $scope.postesDa = []
+      $scope.adresseIPSopra
+      $scope.problems = []
+      $scope.date = Date.now()
+
+      ProblemsTypeService.getProblemsType().then(function (problems) {
+        $scope.problems = problems
+        $scope.problemIndex = initialValue
+        $scope.problemType = $scope.problems[initialValue].typeProbleme
+        $scope.duration = $scope.problems[initialValue].duree
+        $scope.setduration($scope.duration)
+        $scope.comment = ''
+        $scope.user = ''
+        $scope.numPosteDa = ''
+        $scope.adresseIPSopra = '172.50.3.54'
+
+        return PosteDaService.getPostesDa()  
+      })
+      .catch(function (err) {
+        alert('Erreur')
+        console.log(err)
+      }).then(function (posteDa) {
+        $scope.postesDa = posteDa
+      })
+      .catch(function (err) {
+        alert('Erreur')
+        console.log(err)
+      })
+
+      $scope.ontypechange = function (type) {
+        $scope.problemType = type.typeProbleme
+        $scope.duration = type.duree
+        $scope.setduration($scope.duration)
+      }
+
+      $scope.onsubmit = function () {
+        console.log($scope.numPosteDa)
+        var objectToSend = {
+          typeProbleme: $scope.problemType,
+          duree: $scope.duration,
+          commentaire: $scope.comment,
+          user: $scope.user,
+          numPosteDA: ($scope.numPosteDa).numPosteDA,
+          adresseIPSopra: $scope.adresseIPSopra,
+          date: $scope.date
+        }
+        $scope.start()
+
+        setTimeout(function () {
+          ProblemsService
+          .createProblem(objectToSend)
+          .then(function (problems) {
+            $scope.stop()
+            alert('Well inserted')
+          })
+          .catch(function (err) {
+            $scope.stop()
+            alert('Erreur')
+            console.log(err)
+          })
+        }, 5000)
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.controller('ProblemsTypeController', [
+    '$scope',
+    'ProblemsTypeService',
+    'TimeService',
+    function ($scope, ProblemsTypeService, TimeService) {
+      var initialValue = 2
+      $scope.problemType
+      $scope.duration
+      $scope.problemId
+      $scope.problems = []
+
+      ProblemsTypeService.getProblemsType().then(function (problems) {
+        $scope.problems = problems
+        $scope.problemIndex = initialValue
+        $scope.problemType = $scope.problems[initialValue].typeProbleme
+        $scope.duration = $scope.problems[initialValue].duree
+      })
+      .catch(function (err) {
+        alert('Erreur')
+        console.log(err)
+      })
+
+      $scope.setvalue = function (duration) {
+        $scope.unit = TimeService.getTimeUnit(duration)
+        $scope.displaytime = TimeService.computeDisplayTime(duration, $scope.unit)
+      }
+
+      $scope.oncreationtypeproblem = function () {
+        debugger
+        var objectToSend = {
+          typeProbleme: $scope.problemTypeCreation,
+          duree: $scope.durationCreation
+        }
+        //$scope.start()
+
+        setTimeout(function () {
+          ProblemsTypeService
+          .createProblemType(objectToSend)
+          .then(function (problems) {
+            $scope.stop()
+            alert('Well inserted')
+          })
+          .catch(function (err) {
+            $scope.stop()
+            alert('Erreur')
+            console.log(err)
+          })
+        }, 5000)
+      }
+
     }
   ])
 })();// eslint-disable-line semi
@@ -2159,6 +2393,18 @@
           })
         return deferred.promise
       }
+
+      this.getAllProblems = function () {
+        var deferred = $q.defer()
+        $http.get(apiUrlProblems)
+          .then(function (httpInfo) {
+            deferred.resolve(httpInfo.data)
+          })
+          .catch(function (err) {
+            deferred.reject(err)
+          })
+        return deferred.promise
+      }
     }
   ])
 })();// eslint-disable-line no-alert, quotes, semi
@@ -2172,12 +2418,37 @@
     '$http',
     'serverConnexion',
     function ($q, $http, serverConnexion) {
-      debugger
       var ressourceNameGetProblems = 'problemsTypes'
       var apiUrlTypeProblems = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameGetProblems
-      this.getProblems = function () {
+      this.getProblemsType = function () {
         var deferred = $q.defer()
         $http.get(apiUrlTypeProblems)
+          .then(function (httpInfo) {
+            deferred.resolve(httpInfo.data)
+          })
+          .catch(function (err) {
+            deferred.reject(err)
+          })
+        return deferred.promise
+      }
+
+      this.createProblemType = function (data) {
+        var deferred = $q.defer()
+        $http.post(apiUrlPosteDa, data)
+          .then(function (httpInfo) {
+            deferred.resolve(httpInfo.data)
+          })
+          .catch(function (err) {
+            deferred.reject(err)
+          })
+        return deferred.promise
+      }
+
+      this.deleteProblemType = function (data) {
+        var deferred = $q.defer()
+        var ProblemTypeId = data.id
+        var urlDeleteProblemType = apiUrlTypeProblems + '/' + ProblemTypeId
+        $http.delete(urlDeleteProblemType)
           .then(function (httpInfo) {
             deferred.resolve(httpInfo.data)
           })

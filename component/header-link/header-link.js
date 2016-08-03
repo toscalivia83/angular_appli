@@ -2,17 +2,16 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myInputPosteDa', [
+  module.directive('myHeaderLink', [
     function () {
       return {
         restrict: 'E',
         scope: {
           val: '=val',
-          fct: '=fct'
+          label: '@label',
+          url: '@url'
         },
-        templateUrl: '/component/input-poste-da/input-poste-da.html',
-        controller: function ($scope) {
-        }
+        templateUrl: '/component/header-link/header-link.html'
       }
     }
   ])

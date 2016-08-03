@@ -7,12 +7,37 @@
     '$http',
     'serverConnexion',
     function ($q, $http, serverConnexion) {
-      debugger
       var ressourceNameGetProblems = 'problemsTypes'
       var apiUrlTypeProblems = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameGetProblems
-      this.getProblems = function () {
+      this.getProblemsType = function () {
         var deferred = $q.defer()
         $http.get(apiUrlTypeProblems)
+          .then(function (httpInfo) {
+            deferred.resolve(httpInfo.data)
+          })
+          .catch(function (err) {
+            deferred.reject(err)
+          })
+        return deferred.promise
+      }
+
+      this.createProblemType = function (data) {
+        var deferred = $q.defer()
+        $http.post(apiUrlPosteDa, data)
+          .then(function (httpInfo) {
+            deferred.resolve(httpInfo.data)
+          })
+          .catch(function (err) {
+            deferred.reject(err)
+          })
+        return deferred.promise
+      }
+
+      this.deleteProblemType = function (data) {
+        var deferred = $q.defer()
+        var ProblemTypeId = data.id
+        var urlDeleteProblemType = apiUrlTypeProblems + '/' + ProblemTypeId
+        $http.delete(urlDeleteProblemType)
           .then(function (httpInfo) {
             deferred.resolve(httpInfo.data)
           })

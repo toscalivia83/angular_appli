@@ -9,7 +9,7 @@
         "promise"
     ],
     "rules": {
-    	"no-alert": 1,
+    	"no-alert": 2,
     	"no-console": 1,
     	"no-debugger": 2,
         "promise/param-names": 2,

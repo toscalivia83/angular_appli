@@ -20,6 +20,18 @@
           })
         return deferred.promise
       }
+
+      this.getAllProblems = function () {
+        var deferred = $q.defer()
+        $http.get(apiUrlProblems)
+          .then(function (httpInfo) {
+            deferred.resolve(httpInfo.data)
+          })
+          .catch(function (err) {
+            deferred.reject(err)
+          })
+        return deferred.promise
+      }
     }
   ])
 })();// eslint-disable-line no-alert, quotes, semi

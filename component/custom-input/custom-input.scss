@@ -1,11 +1,11 @@
-.input {
+.custom-input {
   position: relative;
   z-index: 1;
   display: inline-block;
   margin: 1em;
-  max-width: 350px;
+  max-width: 260px;
   width: calc(100% - 2em);
-  vertical-align: top;
+  vertical-align: top; 
 }
 
 .input__label-content {
@@ -66,7 +66,6 @@
   text-rendering: geometricPrecision;
 }
 
-
 .input__label--juro::before {
   background: $white-color;
   content: '';
@@ -78,35 +77,6 @@
   border: 0px solid transparent;
   transition: border-width 0.3s, border-color 0.3s;
 }
-
-
-/////////////////////////////////////////////////////////////////////////
-/* .input__field--juro:focus {
-  & + .input__label--juro::before {
-    border-width: 8px;
-    border-color: $blue-field-color;
-    border-top-width: 2em;
-  }
-
-  & + .input__label--juro .input__label-content--juro {
-    color: $white-color;
-    transform: translate3d(0, -1.5em, 0) scale3d(0.75, 0.75, 1) translateZ(1px);
-  }
-}
-
-.input--filled {
-  & .input__label--juro::before {
-    border-width: 8px;
-    border-color: $blue-field-color;
-    border-top-width: 2em;
-  }
-
-  & .input--filled .input__label--juro .input__label-content--juro {
-    color: $white-color;
-    transform: translate3d(0, -1.5em, 0) scale3d(0.75, 0.75, 1) translateZ(1px);
-  }
-} */
-/////////////////////////////////////////////////////////////////////////
 
 .input__field--juro:focus + .input__label--juro::before,
 .input--filled .input__label--juro::before {

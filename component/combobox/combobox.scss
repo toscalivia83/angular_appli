@@ -1,27 +1,27 @@
-.custom-textarea {
+.combobox-custom {
   position: relative;
   z-index: 1;
   display: inline-block;
   margin: 1em;
-  max-width: 540px;
+  max-width: 260px;
   width: calc(100% - 2em);
-  vertical-align: top;
+  vertical-align: top; 
 }
 
-.textarea__label-content {
+.combobox__label-content {
   position: relative;
   display: block;
   padding: 1.6em 0;
   width: 100%;
 }
 
-.textarea__label {
+.combobox__label {
   color: $grey-button-color;
   font-size: 100%;
   font-weight: bold;
 }
 
-.textarea__field {
+.combobox__field {
   position: relative;
   display: block;
   float: right;
@@ -33,26 +33,26 @@
   color: #aaa;
   font-weight: bold;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 /* Juro */
-.textarea--juro {
+.combobox--juro {
   overflow: hidden;
 }
 
-.textarea__field--juro {
+.combobox__field--juro {
   position: absolute;
   z-index: 100;
-  margin-top:30px;
-  height:90px;
+  padding: 3.15em 0.75em 0;
   width: 100%;
   background: transparent;
   color: $blue-field-color;
   font-size: 0.85em;
-  padding-bottom: 3px;
 }
 
-.textarea__label--juro {
+.combobox__label--juro {
   padding: 0;
   width: 100%;
   height: 100%;
@@ -60,7 +60,7 @@
   text-align: left;
 }
 
-.textarea__label-content--juro {
+.combobox__label-content--juro {
   padding: 2em 1em;
   transform-origin: 0% 50%;
   transition: transform 0.3s, color 0.3s;
@@ -68,7 +68,7 @@
   text-rendering: geometricPrecision;
 }
 
-.textarea__label--juro::before {
+.combobox__label--juro::before {
   background: $white-color;
   content: '';
   position: absolute;
@@ -80,20 +80,20 @@
   transition: border-width 0.3s, border-color 0.3s;
 }
 
-.textarea__field--juro:focus + .textarea__label--juro::before,
-.textarea--filled .textarea__label--juro::before {
+.combobox__field--juro:focus + .combobox__label--juro::before,
+.combobox--filled .combobox__label--juro::before {
   border-width: 8px;
   border-color: $blue-field-color;
   border-top-width: 2em;
 }
 
-.textarea__field--juro:focus + .textarea__label--juro .textarea__label-content--juro,
-.textarea--filled .textarea__label--juro .textarea__label-content--juro {
+.combobox__field--juro:focus + .combobox__label--juro .combobox__label-content--juro,
+.combobox--filled .combobox__label--juro .combobox__label-content--juro {
   color: $white-color;
   transform: translate3d(0, -1.5em, 0) scale3d(0.75, 0.75, 1) translateZ(1px);
 }
 
-.textarea__field:focus {
+.combobox__field:focus {
   outline: none;
   color: $blue-field-color;
 }
