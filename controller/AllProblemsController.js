@@ -25,7 +25,7 @@
         $scope.problemIndex = initialValue
         $scope.problemType = $scope.problems[initialValue].typeProbleme
         $scope.duration = $scope.problems[initialValue].duree
-        //$scope.setduration($scope.duration)
+        // $scope.setduration($scope.duration)
         $scope.comment = ''
         $scope.user = ''
         $scope.numPosteDa = ''

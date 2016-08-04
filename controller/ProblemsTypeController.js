@@ -30,28 +30,23 @@
       }
 
       $scope.oncreationtypeproblem = function () {
-        debugger
         var objectToSend = {
           typeProbleme: $scope.problemTypeCreation,
           duree: $scope.durationCreation
         }
-        //$scope.start()
 
         setTimeout(function () {
           ProblemsTypeService
           .createProblemType(objectToSend)
           .then(function (problems) {
-            $scope.stop()
             alert('Well inserted')
           })
           .catch(function (err) {
-            $scope.stop()
             alert('Erreur')
             console.log(err)
           })
         }, 5000)
       }
-
     }
   ])
 })();// eslint-disable-line semi

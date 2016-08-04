@@ -18,7 +18,7 @@
         console.log(err)
       })
 
-      $scope.oncreate = function () {
+      $scope.onclick = function () {
         var objectToSend = {
           numPosteDA: $scope.numPosteDa
         }

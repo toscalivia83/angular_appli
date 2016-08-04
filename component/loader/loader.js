@@ -1263,7 +1263,7 @@
             var renderBase = params.renderBase
 
             if (sides < 3) {
-              console.warn('At least 3 sides required.')
+              // console.warn('At least 3 sides required.')
               sides = 3
             }
 
@@ -1553,7 +1553,6 @@
             oReq.addEventListener('progress', function (oEvent) {
               if (oEvent.lengthComputable) {
                 var percent = Math.ceil(oEvent.loaded / oEvent.total * 100)
-                console.log('ajax loding percent', percent)
 
                 // By setting the end value with the actual loading percentage
                 // the spinner will progress based on the actual ajax loading time.

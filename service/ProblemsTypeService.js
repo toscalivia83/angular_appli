@@ -23,7 +23,7 @@
 
       this.createProblemType = function (data) {
         var deferred = $q.defer()
-        $http.post(apiUrlPosteDa, data)
+        $http.post(apiUrlTypeProblems, data)
           .then(function (httpInfo) {
             deferred.resolve(httpInfo.data)
           })

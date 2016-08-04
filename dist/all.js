@@ -125,6 +125,26 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
+  module.directive('myCustomInput', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          fct: '=fct',
+          placeholder: '@placeholder'
+        },
+        templateUrl: '/component/custom-input/custom-input.html'
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
   module.directive('myHeaderLink', [
     function () {
       return {
@@ -186,26 +206,6 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myCustomInput', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          val: '=val',
-          label: '@label',
-          fct: '=fct',
-          placeholder: '@placeholder'
-        },
-        templateUrl: '/component/custom-input/custom-input.html'
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
   module.directive('myDuration', [
     function () {
       return {
@@ -250,23 +250,6 @@
         itemId: '=idvalue'
       },
       templateUrl: '/component/list-poste-da/list-poste-da.html'
-    }
-  }])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myRadiolistProblems', ['configMessages', function (configMessages) {
-    return {
-      restrict: 'E',
-      scope: {
-        problems: '=problemsType',
-        ondatachange: '=ondatachange',
-        itemId: '=idvalue'
-      },
-      templateUrl: '/component/radiolist-problems/radiolist-problems.html'
     }
   }])
 })();// eslint-disable-line semi
@@ -1536,7 +1519,7 @@
             var renderBase = params.renderBase
 
             if (sides < 3) {
-              console.warn('At least 3 sides required.')
+              // console.warn('At least 3 sides required.')
               sides = 3
             }
 
@@ -1826,7 +1809,6 @@
             oReq.addEventListener('progress', function (oEvent) {
               if (oEvent.lengthComputable) {
                 var percent = Math.ceil(oEvent.loaded / oEvent.total * 100)
-                console.log('ajax loding percent', percent)
 
                 // By setting the end value with the actual loading percentage
                 // the spinner will progress based on the actual ajax loading time.
@@ -1875,7 +1857,7 @@
         scope: {
           val: '=val',
           label: '@label',
-          fct: '=fct'
+          onclick: '=onclick'
         },
         templateUrl: '/component/input-poste-da/input-poste-da.html',
         controller: function ($scope) {
@@ -1883,6 +1865,23 @@
       }
     }
   ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myRadiolistProblems', ['configMessages', function (configMessages) {
+    return {
+      restrict: 'E',
+      scope: {
+        problems: '=problemsType',
+        ondatachange: '=ondatachange',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/radiolist-problems/radiolist-problems.html'
+    }
+  }])
 })();// eslint-disable-line semi
 
 (function () {
@@ -2007,7 +2006,7 @@
         $scope.problemIndex = initialValue
         $scope.problemType = $scope.problems[initialValue].typeProbleme
         $scope.duration = $scope.problems[initialValue].duree
-        //$scope.setduration($scope.duration)
+        // $scope.setduration($scope.duration)
         $scope.comment = ''
         $scope.user = ''
         $scope.numPosteDa = ''
@@ -2074,7 +2073,7 @@
         console.log(err)
       })
 
-      $scope.oncreate = function () {
+      $scope.onclick = function () {
         var objectToSend = {
           numPosteDA: $scope.numPosteDa
         }
@@ -2154,7 +2153,7 @@
         $scope.numPosteDa = ''
         $scope.adresseIPSopra = '172.50.3.54'
 
-        return PosteDaService.getPostesDa()  
+        return PosteDaService.getPostesDa()
       })
       .catch(function (err) {
         alert('Erreur')
@@ -2174,7 +2173,6 @@
       }
 
       $scope.onsubmit = function () {
-        console.log($scope.numPosteDa)
         var objectToSend = {
           typeProbleme: $scope.problemType,
           duree: $scope.duration,
@@ -2236,28 +2234,23 @@
       }
 
       $scope.oncreationtypeproblem = function () {
-        debugger
         var objectToSend = {
           typeProbleme: $scope.problemTypeCreation,
           duree: $scope.durationCreation
         }
-        //$scope.start()
 
         setTimeout(function () {
           ProblemsTypeService
           .createProblemType(objectToSend)
           .then(function (problems) {
-            $scope.stop()
             alert('Well inserted')
           })
           .catch(function (err) {
-            $scope.stop()
             alert('Erreur')
             console.log(err)
           })
         }, 5000)
       }
-
     }
   ])
 })();// eslint-disable-line semi
@@ -2416,7 +2409,7 @@
 
       this.createProblemType = function (data) {
         var deferred = $q.defer()
-        $http.post(apiUrlPosteDa, data)
+        $http.post(apiUrlTypeProblems, data)
           .then(function (httpInfo) {
             deferred.resolve(httpInfo.data)
           })

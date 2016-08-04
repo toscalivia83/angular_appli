@@ -32,7 +32,7 @@
         $scope.numPosteDa = ''
         $scope.adresseIPSopra = '172.50.3.54'
 
-        return PosteDaService.getPostesDa()  
+        return PosteDaService.getPostesDa()
       })
       .catch(function (err) {
         alert('Erreur')
@@ -52,7 +52,6 @@
       }
 
       $scope.onsubmit = function () {
-        console.log($scope.numPosteDa)
         var objectToSend = {
           typeProbleme: $scope.problemType,
           duree: $scope.duration,

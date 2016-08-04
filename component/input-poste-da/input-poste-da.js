@@ -9,7 +9,7 @@
         scope: {
           val: '=val',
           label: '@label',
-          fct: '=fct'
+          onclick: '=onclick'
         },
         templateUrl: '/component/input-poste-da/input-poste-da.html',
         controller: function ($scope) {

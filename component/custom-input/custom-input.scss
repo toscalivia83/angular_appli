@@ -91,6 +91,19 @@
   transform: translate3d(0, -1.5em, 0) scale3d(0.75, 0.75, 1) translateZ(1px);
 }
 
+.input__field--juro:focus + .input__label--juro::before,
+.input--filled-placeholder .input__label--juro::before {
+  border-width: 8px;
+  border-color: $blue-field-color;
+  border-top-width: 2em;
+}
+
+.input__field--juro:focus + .input__label--juro .input__label-content--juro,
+.input--filled-placeholder .input__label--juro .input__label-content--juro {
+  color: $white-color;
+  transform: translate3d(0, -1.5em, 0) scale3d(0.75, 0.75, 1) translateZ(1px);
+}
+
 .input__field:focus {
   outline: none;
   color: $blue-field-color;
