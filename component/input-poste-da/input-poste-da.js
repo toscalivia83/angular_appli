@@ -8,6 +8,7 @@
         restrict: 'E',
         scope: {
           val: '=val',
+          label: '@label',
           fct: '=fct'
         },
         templateUrl: '/component/input-poste-da/input-poste-da.html',

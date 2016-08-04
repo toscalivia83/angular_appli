@@ -50,23 +50,6 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myComment', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          comment: '=enterNewComment'
-        },
-        templateUrl: '/component/comment/comment.html'
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
   module.directive('myComboboxPosteDa', [function () {
     return {
       restrict: 'E',
@@ -85,16 +68,14 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myCustomInput', [
+  module.directive('myComment', [
     function () {
       return {
         restrict: 'E',
         scope: {
-          val: '=val',
-          label: '@label',
-          fct: '=fct'
+          comment: '=enterNewComment'
         },
-        templateUrl: '/component/custom-input/custom-input.html'
+        templateUrl: '/component/comment/comment.html'
       }
     }
   ])
@@ -135,6 +116,25 @@
             buttonSecondChildHeight.css('height', '150px')
           }
         }
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myHeaderLink', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          url: '@url'
+        },
+        templateUrl: '/component/header-link/header-link.html'
       }
     }
   ])
@@ -186,56 +186,20 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myHeaderLink', [
+  module.directive('myCustomInput', [
     function () {
       return {
         restrict: 'E',
         scope: {
           val: '=val',
           label: '@label',
-          url: '@url'
+          fct: '=fct',
+          placeholder: '@placeholder'
         },
-        templateUrl: '/component/header-link/header-link.html'
+        templateUrl: '/component/custom-input/custom-input.html'
       }
     }
   ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myInputPosteDa', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          val: '=val',
-          fct: '=fct'
-        },
-        templateUrl: '/component/input-poste-da/input-poste-da.html',
-        controller: function ($scope) {
-        }
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myPostesDa', [function () {
-    return {
-      restrict: 'E',
-      scope: {
-        postesDa: '=postesDa',
-        ondelete: '=ondelete',
-        itemId: '=idvalue'
-      },
-      templateUrl: '/component/list-poste-da/list-poste-da.html'
-    }
-  }])
 })();// eslint-disable-line semi
 
 (function () {
@@ -271,6 +235,40 @@
       }
     }
   ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myPostesDa', [function () {
+    return {
+      restrict: 'E',
+      scope: {
+        postesDa: '=postesDa',
+        ondelete: '=ondelete',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/list-poste-da/list-poste-da.html'
+    }
+  }])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myRadiolistProblems', ['configMessages', function (configMessages) {
+    return {
+      restrict: 'E',
+      scope: {
+        problems: '=problemsType',
+        ondatachange: '=ondatachange',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/radiolist-problems/radiolist-problems.html'
+    }
+  }])
 })();// eslint-disable-line semi
 
 (function () {
@@ -1870,17 +1868,21 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myRadiolistProblems', ['configMessages', function (configMessages) {
-    return {
-      restrict: 'E',
-      scope: {
-        problems: '=problemsType',
-        ondatachange: '=ondatachange',
-        itemId: '=idvalue'
-      },
-      templateUrl: '/component/radiolist-problems/radiolist-problems.html'
+  module.directive('myInputPosteDa', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          fct: '=fct'
+        },
+        templateUrl: '/component/input-poste-da/input-poste-da.html',
+        controller: function ($scope) {
+        }
+      }
     }
-  }])
+  ])
 })();// eslint-disable-line semi
 
 (function () {

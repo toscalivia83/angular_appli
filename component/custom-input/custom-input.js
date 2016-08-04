@@ -9,7 +9,8 @@
         scope: {
           val: '=val',
           label: '@label',
-          fct: '=fct'
+          fct: '=fct',
+          placeholder: '@placeholder'
         },
         templateUrl: '/component/custom-input/custom-input.html'
       }
