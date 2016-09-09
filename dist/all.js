@@ -141,32 +141,39 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myDuration', [
+  module.directive('myHeader', [
     function () {
       return {
         restrict: 'E',
+        templateUrl: 'component/header/header.html',
         scope: {
-          setvalue: '=setvalue',
-          label: '@label',
-          val: '=val',
-          placeholder: '@placeholder',
-          unit: '=unit'
+          headerTitle: '@headerTitle',
+          pathHeader: '@pathHeader'
         },
-        controller: ['$scope', 'TimeService', function ($scope, TimeService) {
-          $scope.unit = 's'
-
-          $scope.computetime = function (value) {
-            $scope.duration = TimeService.convertInMs(value, $scope.unit)
-            return $scope.duration
+        controller: ['$scope', '$location', 'serverConnexion', function ($scope, $location, serverConnexion) {
+          var ressourceNameRetrieveCsv = 'CSV'
+          $scope.csvUrl = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameRetrieveCsv
+          $scope.valposteda = false
+          $scope.valproblems = false
+          $scope.vallistproblems = false
+          $scope.valallproblems = false
+          $scope.valcsv = false
+          if ($location.path() === '/poste-da') {
+            $scope.valposteda = true
           }
-
-          $scope.checknumber = function (e) {
-            if (!TimeService.keyisvalid(e.key)) {
-              e.preventDefault()
-            }
+          if ($location.path() === '/types-problems') {
+            $scope.vallistproblems = true
+          }
+          if ($location.path() === '/') {
+            $scope.valproblems = true
+          }
+          if ($location.path() === '/all-problems') {
+            $scope.valallproblems = true
           }
         }],
-        templateUrl: '/component/input-duration/input-duration.html'
+        link: function ($scope, element, attributes) {
+
+        }
       }
     }
   ])
@@ -216,48 +223,6 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myHeader', [
-    function () {
-      return {
-        restrict: 'E',
-        templateUrl: 'component/header/header.html',
-        scope: {
-          headerTitle: '@headerTitle',
-          pathHeader: '@pathHeader'
-        },
-        controller: ['$scope', '$location', 'serverConnexion', function ($scope, $location, serverConnexion) {
-          var ressourceNameRetrieveCsv = 'CSV'
-          $scope.csvUrl = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameRetrieveCsv
-          $scope.valposteda = false
-          $scope.valproblems = false
-          $scope.vallistproblems = false
-          $scope.valallproblems = false
-          $scope.valcsv = false
-          if ($location.path() === '/poste-da') {
-            $scope.valposteda = true
-          }
-          if ($location.path() === '/types-problems') {
-            $scope.vallistproblems = true
-          }
-          if ($location.path() === '/') {
-            $scope.valproblems = true
-          }
-          if ($location.path() === '/all-problems') {
-            $scope.valallproblems = true
-          }
-        }],
-        link: function ($scope, element, attributes) {
-
-        }
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
   module.directive('myHeaderLink', [
     function () {
       return {
@@ -271,6 +236,96 @@
       }
     }
   ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myDuration', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          setvalue: '=setvalue',
+          label: '@label',
+          val: '=val',
+          placeholder: '@placeholder',
+          unit: '=unit'
+        },
+        controller: ['$scope', 'TimeService', function ($scope, TimeService) {
+          $scope.unit = 's'
+
+          $scope.computetime = function (value) {
+            $scope.duration = TimeService.convertInMs(value, $scope.unit)
+            return $scope.duration
+          }
+
+          $scope.checknumber = function (e) {
+            if (!TimeService.keyisvalid(e.key)) {
+              e.preventDefault()
+            }
+          }
+        }],
+        templateUrl: '/component/input-duration/input-duration.html'
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myListOfProblems', [function () {
+    return {
+      restrict: 'E',
+      scope: {
+        problems: '=problems',
+        ondelete: '=ondelete'
+      },
+      templateUrl: '/component/list-problems/list-problems.html',
+      controller: ['$scope', function ($scope) {
+        $scope.execDates = function () {
+          $scope.myDate = new Date()
+        }
+      }]
+    }
+  }])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myPostesDa', [function () {
+    return {
+      restrict: 'E',
+      scope: {
+        postesDa: '=postesDa',
+        ondelete: '=ondelete',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/list-poste-da/list-poste-da.html'
+    }
+  }])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myRadiolistProblems', [ function () {
+    return {
+      restrict: 'E',
+      scope: {
+        problems: '=problemsType',
+        ondatachange: '=ondatachange',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/radiolist-problems/radiolist-problems.html'
+    }
+  }])
 })();// eslint-disable-line semi
 
 (function () {
@@ -1865,62 +1920,7 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myPostesDa', [function () {
-    return {
-      restrict: 'E',
-      scope: {
-        postesDa: '=postesDa',
-        ondelete: '=ondelete',
-        itemId: '=idvalue'
-      },
-      templateUrl: '/component/list-poste-da/list-poste-da.html'
-    }
-  }])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myListOfProblems', [function () {
-    return {
-      restrict: 'E',
-      scope: {
-        problems: '=problems',
-        ondelete: '=ondelete'
-      },
-      templateUrl: '/component/list-problems/list-problems.html',
-      controller: ['$scope', function ($scope) {
-        $scope.execDates = function () {
-          $scope.myDate = new Date()
-        }
-      }]
-    }
-  }])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myRadiolistProblems', ['configMessages', function (configMessages) {
-    return {
-      restrict: 'E',
-      scope: {
-        problems: '=problemsType',
-        ondatachange: '=ondatachange',
-        itemId: '=idvalue'
-      },
-      templateUrl: '/component/radiolist-problems/radiolist-problems.html'
-    }
-  }])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myRadiolistTypeProblems', ['configMessages', function (configMessages) {
+  module.directive('myRadiolistTypeProblems', [ function () {
     return {
       restrict: 'E',
       scope: {

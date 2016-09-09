@@ -2,7 +2,7 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myRadiolistTypeProblems', ['configMessages', function (configMessages) {
+  module.directive('myRadiolistTypeProblems', [ function () {
     return {
       restrict: 'E',
       scope: {
