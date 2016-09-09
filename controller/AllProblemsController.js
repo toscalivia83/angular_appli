@@ -5,68 +5,50 @@
   module.controller('AllProblemsController', [
     '$scope',
     'ProblemsService',
-    'ProblemsTypeService',
-    'PosteDaService',
-    function ($scope, ProblemsService, ProblemsTypeService, PosteDaService) {
-      var initialValue = 2
-      $scope.problemType
-      $scope.duration
-      $scope.comment
-      $scope.problemId
-      $scope.comment
-      $scope.user
-      $scope.numPosteDa = []
-      $scope.adresseIPSopra
+    'TimeService',
+    function ($scope, ProblemsService, TimeService) {
       $scope.problems = []
-      $scope.date = Date.now()
 
       ProblemsService.getAllProblems().then(function (problems) {
         $scope.problems = problems
-        $scope.problemIndex = initialValue
-        $scope.problemType = $scope.problems[initialValue].typeProbleme
-        $scope.duration = $scope.problems[initialValue].duree
-        // $scope.setduration($scope.duration)
-        $scope.comment = ''
-        $scope.user = ''
-        $scope.numPosteDa = ''
-        $scope.adresseIPSopra = '172.50.3.54'
       })
       .catch(function (err) {
         alert('Erreur')
         console.log(err)
       })
 
-      $scope.ontypechange = function (type) {
-        $scope.problemType = type.typeProbleme
-        $scope.duration = type.duree
-        $scope.setduration($scope.duration)
-      }
-
-      $scope.onsubmit = function () {
-        var objectToSend = {
-          typeProbleme: $scope.problemType,
-          duree: $scope.duration,
-          commentaire: $scope.comment,
-          user: $scope.user,
-          numPosteDA: $scope.numPosteDa,
-          adresseIPSopra: $scope.adresseIPSopra,
-          date: $scope.date
+      $scope.ondelete = function (type) {
+        var duree = TimeService.convertInMs(type.displaytime, type.unit)
+        var objectToDelete = {
+          id: type.id,
+          typeProbleme: type.typeProbleme,
+          duree: duree,
+          commentaire: type.commentaire,
+          user: type.user,
+          numPosteDA: type.numPosteDA,
+          adresseIPSopra: type.adresseIPSopra,
+          date: type.date
         }
         $scope.start()
-
         setTimeout(function () {
-          ProblemsService
-          .createProblem(objectToSend)
-          .then(function (problems) {
+          ProblemsService.deleteProblem(objectToDelete).then(function (typeProbleme) {
             $scope.stop()
-            alert('Well inserted')
+            alert('Well deleted')
+            var tableDeleted = _.remove($scope.problems, function (element) {
+              if (objectToDelete.id === element.id) {
+                return false
+              } else {
+                return true
+              }
+            })
+            $scope.problems = tableDeleted
           })
           .catch(function (err) {
             $scope.stop()
             alert('Erreur')
             console.log(err)
           })
-        }, 5000)
+        }, 3000)
       }
     }
   ])

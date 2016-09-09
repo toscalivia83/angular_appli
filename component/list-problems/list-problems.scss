@@ -1,0 +1,102 @@
+.list-problems_user {
+  width:250px;
+}
+
+.list-problems_textarea {
+  width:350px;
+}
+
+.list-problems__input {
+  width:145px;
+  display:block;
+}
+
+.list-problems_label {
+  display:block;
+}
+
+.list-problems_defaultwidth {
+  width:200px;
+}
+
+.list-problems_user_title {
+  width:250px;
+  font-weight: bold;
+}
+
+.list-problems_textarea_title {
+  width:350px;
+  font-weight: bold;
+  display:inline-block; 
+  vertical-align:top;
+  font-size:1.05em;
+}
+
+.list-problems_defaultwidth_title {
+  width:200px;
+  font-weight: bold;
+  font-size:1.05em;
+}
+
+.list-problems {
+  display:inline-block; 
+  vertical-align:top;
+  font-size:1.05em;
+}
+
+.list-problems_list {
+  color:#AAA;
+  margin-top: 30px;
+}
+
+.list-problems_title {
+  font-weight: bold;
+  font-size:1.05em;
+}
+
+.input-cross {
+  visibility: hidden;
+}
+
+.list-problems_inline {
+  display: inline-block;
+}
+
+.list-problems_min_date {
+  display: inline-block;
+  font-weight: bold;
+  font-size:1.05em;
+}
+
+.list-problems_max_date {
+  display: block;
+  font-weight: bold;
+  font-size:1.05em;
+}
+
+.list-problems_any {
+  visibility: hidden;
+}
+
+.list_problems-date {
+  vertical-align: top;
+}
+
+.list-problems_cross {
+  vertical-align: middle;
+  display: inline-block;
+  margin-top: -44px;
+}
+
+.list-problems-div_date-duration {
+  display: inline-block;
+}
+
+.list-problems-input_date-duration {
+  font-size: 1.05em;
+} 
+
+.list-problems-div_date-unit {
+  display: inline-block;
+  vertical-align: top;
+}

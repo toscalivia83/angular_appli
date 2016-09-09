@@ -16,21 +16,21 @@
           $scope.csvUrl = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameRetrieveCsv
           $scope.valposteda = false
           $scope.valproblems = false
+          $scope.vallistproblems = false
+          $scope.valallproblems = false
           $scope.valcsv = false
           if ($location.path() === '/poste-da') {
             $scope.valposteda = true
           }
-            /* if ($location.path() === '/all-problems') {
-              valallproblems = true
-            }*/
+          if ($location.path() === '/types-problems') {
+            $scope.vallistproblems = true
+          }
           if ($location.path() === '/') {
             $scope.valproblems = true
           }
-            /* if ($location.path() === '/all-problems') {
-              valallproblems = true
-            }*/
-          // }
-          // if($location.path)
+          if ($location.path() === '/all-problems') {
+            $scope.valallproblems = true
+          }
         }],
         link: function ($scope, element, attributes) {
 

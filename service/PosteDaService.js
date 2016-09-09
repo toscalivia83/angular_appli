@@ -49,5 +49,4 @@
       }
     }
   ])
-})();// eslint-disable-line no-alert, quotes, semi
-
+})();// eslint-disable-line semi

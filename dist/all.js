@@ -1,7 +1,7 @@
 (function () {
   'use strict'
 
-  angular.module('ProblemsTest', ['ngRoute', 'ngSanitize', 'ngCsv', 'pascalprecht.translate'])
+  angular.module('ProblemsTest', ['ngRoute', 'ngSanitize', 'pascalprecht.translate', 'ngMaterial'])
 })();// eslint-disable-line semi
 
 (function () {
@@ -68,14 +68,105 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myComment', [
+  module.directive('myCreationTypeProbleme', [
     function () {
       return {
         restrict: 'E',
         scope: {
-          comment: '=enterNewComment'
+          valduree: '=valduree',
+          valtypeproblem: '=valtypeproblem',
+          labelduree: '@labelduree',
+          labeltypeproblem: '@labeltypeproblem',
+          onclick: '=onclick',
+          placeholderduree: '@placeholderduree',
+          placeholdertypeproblem: '@placeholdertypeproblem',
+          durationAdded: '=durationAdded',
+          unitAdded: '=unitAdded',
+          unit: '=unit'
         },
-        templateUrl: '/component/comment/comment.html'
+        templateUrl: '/component/creation-type-probleme/creation-type-probleme.html',
+        controller: ['$scope', 'TimeService', function ($scope, TimeService) {
+          $scope.retrievetime = function () {
+            $scope.durationAdded = TimeService.convertInMs($scope.valduree, $scope.unit)
+          }
+        }]
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myCreationInput', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          onclick: '=onclick',
+          placeholder: '@placeholder'
+        },
+        templateUrl: '/component/creation-input/creation-input.html',
+        controller: function ($scope) {
+        }
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myCustomInput', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          fct: '=fct',
+          placeholder: '@placeholder'
+        },
+        templateUrl: '/component/custom-input/custom-input.html'
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myDuration', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          setvalue: '=setvalue',
+          label: '@label',
+          val: '=val',
+          placeholder: '@placeholder',
+          unit: '=unit'
+        },
+        controller: ['$scope', 'TimeService', function ($scope, TimeService) {
+          $scope.unit = 's'
+
+          $scope.computetime = function (value) {
+            $scope.duration = TimeService.convertInMs(value, $scope.unit)
+            return $scope.duration
+          }
+
+          $scope.checknumber = function (e) {
+            if (!TimeService.keyisvalid(e.key)) {
+              e.preventDefault()
+            }
+          }
+        }],
+        templateUrl: '/component/input-duration/input-duration.html'
       }
     }
   ])
@@ -125,17 +216,39 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myCustomInput', [
+  module.directive('myHeader', [
     function () {
       return {
         restrict: 'E',
+        templateUrl: 'component/header/header.html',
         scope: {
-          val: '=val',
-          label: '@label',
-          fct: '=fct',
-          placeholder: '@placeholder'
+          headerTitle: '@headerTitle',
+          pathHeader: '@pathHeader'
         },
-        templateUrl: '/component/custom-input/custom-input.html'
+        controller: ['$scope', '$location', 'serverConnexion', function ($scope, $location, serverConnexion) {
+          var ressourceNameRetrieveCsv = 'CSV'
+          $scope.csvUrl = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameRetrieveCsv
+          $scope.valposteda = false
+          $scope.valproblems = false
+          $scope.vallistproblems = false
+          $scope.valallproblems = false
+          $scope.valcsv = false
+          if ($location.path() === '/poste-da') {
+            $scope.valposteda = true
+          }
+          if ($location.path() === '/types-problems') {
+            $scope.vallistproblems = true
+          }
+          if ($location.path() === '/') {
+            $scope.valproblems = true
+          }
+          if ($location.path() === '/all-problems') {
+            $scope.valallproblems = true
+          }
+        }],
+        link: function ($scope, element, attributes) {
+
+        }
       }
     }
   ])
@@ -158,100 +271,6 @@
       }
     }
   ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myHeader', [
-    function () {
-      return {
-        restrict: 'E',
-        templateUrl: 'component/header/header.html',
-        scope: {
-          headerTitle: '@headerTitle',
-          pathHeader: '@pathHeader'
-        },
-        controller: ['$scope', '$location', 'serverConnexion', function ($scope, $location, serverConnexion) {
-          var ressourceNameRetrieveCsv = 'CSV'
-          $scope.csvUrl = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameRetrieveCsv
-          $scope.valposteda = false
-          $scope.valproblems = false
-          $scope.valcsv = false
-          if ($location.path() === '/poste-da') {
-            $scope.valposteda = true
-          }
-            /* if ($location.path() === '/all-problems') {
-              valallproblems = true
-            }*/
-          if ($location.path() === '/') {
-            $scope.valproblems = true
-          }
-            /* if ($location.path() === '/all-problems') {
-              valallproblems = true
-            }*/
-          // }
-          // if($location.path)
-        }],
-        link: function ($scope, element, attributes) {
-
-        }
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myDuration', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          duration: '=problemsTypeDuree',
-          setvalue: '=setvalue'
-        },
-        controller: ['$scope', 'TimeService', function ($scope, TimeService) {
-          $scope.setvalue = function (duration) {
-            $scope.unit = TimeService.getTimeUnit(duration)
-            $scope.displaytime = TimeService.computeDisplayTime(duration, $scope.unit)
-          }
-
-          $scope.computetime = function (value) {
-            $scope.duration = TimeService.convertInMs(value, $scope.unit)
-            return $scope.duration
-          }
-
-          $scope.checknumber = function (e) {
-            if (!TimeService.keyisvalid(e.key)) {
-              e.preventDefault()
-            }
-          }
-        }],
-        templateUrl: '/component/input-duration/input-duration.html'
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myPostesDa', [function () {
-    return {
-      restrict: 'E',
-      scope: {
-        postesDa: '=postesDa',
-        ondelete: '=ondelete',
-        itemId: '=idvalue'
-      },
-      templateUrl: '/component/list-poste-da/list-poste-da.html'
-    }
-  }])
 })();// eslint-disable-line semi
 
 (function () {
@@ -285,10 +304,6 @@
           }
 
           // SpringSystem
-          // ------------
-          // **SpringSystem** is a set of Springs that all run on the same physics
-          // timing loop. To get started with a Rebound animation you first
-          // create a new SpringSystem and then add springs to it.
           var SpringSystem = rebound.SpringSystem = function SpringSystem (looper) {
             this._springRegistry = {}
             this._activeSprings = []
@@ -1850,21 +1865,38 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myInputPosteDa', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          val: '=val',
-          label: '@label',
-          onclick: '=onclick'
-        },
-        templateUrl: '/component/input-poste-da/input-poste-da.html',
-        controller: function ($scope) {
-        }
-      }
+  module.directive('myPostesDa', [function () {
+    return {
+      restrict: 'E',
+      scope: {
+        postesDa: '=postesDa',
+        ondelete: '=ondelete',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/list-poste-da/list-poste-da.html'
     }
-  ])
+  }])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myListOfProblems', [function () {
+    return {
+      restrict: 'E',
+      scope: {
+        problems: '=problems',
+        ondelete: '=ondelete'
+      },
+      templateUrl: '/component/list-problems/list-problems.html',
+      controller: ['$scope', function ($scope) {
+        $scope.execDates = function () {
+          $scope.myDate = new Date()
+        }
+      }]
+    }
+  }])
 })();// eslint-disable-line semi
 
 (function () {
@@ -1888,27 +1920,29 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  var configConnexionServer = {
-    port: '8080',
-    server: 'localhost'
-  }
-
-  module.constant('serverConnexion', configConnexionServer)
+  module.directive('myRadiolistTypeProblems', ['configMessages', function (configMessages) {
+    return {
+      restrict: 'E',
+      scope: {
+        problemsFormatted: '=problemsFormatted',
+        ondelete: '=ondelete',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/radiolist-type-problems/radiolist-type-problems.html'
+    }
+  }])
 })();// eslint-disable-line semi
 
 (function () {
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  var configMessages = {
-    problems: 'problems',
-    typeProbleme: 'typeProbleme',
-    repeatProblems: 'x in problems',
-    valueProblem: '{{x.typeProblems}}',
-    valueDuree: '{{x.duree}}'
+  var configConnexionServer = {
+    port: '8080',
+    server: 'localhost'
   }
 
-  module.constant('configMessages', configMessages)
+  module.constant('serverConnexion', configConnexionServer)
 })();// eslint-disable-line semi
 
 (function () {
@@ -1948,8 +1982,16 @@
       'HOME-MESSAGE': '',
 
       'PROBLEMS-TITLE': 'Ajouter un problème',
-      'PROBLEMS-TYPE-TITLE': 'Ajouter un type de problème',
-      'POSTES-DA-TITLE': 'Gérer les postes Dassault',
+      'PROBLEMS-TYPE-TITLE': 'Gérer les types de problèmes',
+      'POSTES-DA-TITLE': 'Gérer les postes',
+      'ALL-PROBLEMS-TITLE': 'Affichage des problèmes entrés',
+
+      'PROBLEMS-HEADER': 'PROBLEMES',
+      'PROBLEMS-TYPE-HEADER': 'TYPES DE PROBLEMES',
+      'POSTES-DA-HEADER': 'POSTES',
+      'ALL-PROBLEMS-HEADER': 'LISTE DE PROBLEMES',
+      'DOWNLOAD-CSV': 'DOWNLOAD CSV',
+
 
       'PATH-POSTE-DA': '/poste-da',
       'PATH-PROBLEMS': '/',
@@ -1962,11 +2004,26 @@
       'MINUTES-DURATION': 'minutes',
       'HOURS-DURATION': 'heures',
 
-      'PROBLEM-USER': 'User',
-      'PROBLEM-NUM-POSTE-DA': 'Numéro de poste Dassault',
+      'PROBLEM': 'Problème',
+      'PROBLEM-USER': 'Utilisateur',
+      'PROBLEM-NUM-POSTE-DA': 'Numéro de poste',
       'PROBLEM-ADRESS-IP': 'Adresse IP',
       'PROBLEM-DURATION': 'Durée',
+      'PROBLEM-DURATION-BY-DEFAULT': 'Durée par défaut',
       'PROBLEM-COMMENT': 'Commentaires',
+      'PROBLEM-TYPE': 'Type de problème',
+
+      'POSTEDA-CREATION': 'Nouveau Poste Dassault',
+      'DURATION-CREATION': 'Nouvelle durée',
+      'TYPE-PROBLEME-CREATION': 'Nouveau type de problème',
+
+      'MIN-DATE': 'Date min',
+      'MAX-DATE': 'Date max',
+      'MIN-DURATION': 'Durée min',
+      'MAX-DURATION': 'Durée max',
+
+      'BUTTON-SUBMIT': 'Valider',
+      'BUTTON-CREATE': 'Créer',
 
       'SUCCESS-MESSAGE': 'Ajouté !',
       'ERROR-MESSAGE-VOID-POSTE': 'Veuillez remplir le numéro de poste Dassault',
@@ -1986,68 +2043,50 @@
   module.controller('AllProblemsController', [
     '$scope',
     'ProblemsService',
-    'ProblemsTypeService',
-    'PosteDaService',
-    function ($scope, ProblemsService, ProblemsTypeService, PosteDaService) {
-      var initialValue = 2
-      $scope.problemType
-      $scope.duration
-      $scope.comment
-      $scope.problemId
-      $scope.comment
-      $scope.user
-      $scope.numPosteDa = []
-      $scope.adresseIPSopra
+    'TimeService',
+    function ($scope, ProblemsService, TimeService) {
       $scope.problems = []
-      $scope.date = Date.now()
 
       ProblemsService.getAllProblems().then(function (problems) {
         $scope.problems = problems
-        $scope.problemIndex = initialValue
-        $scope.problemType = $scope.problems[initialValue].typeProbleme
-        $scope.duration = $scope.problems[initialValue].duree
-        // $scope.setduration($scope.duration)
-        $scope.comment = ''
-        $scope.user = ''
-        $scope.numPosteDa = ''
-        $scope.adresseIPSopra = '172.50.3.54'
       })
       .catch(function (err) {
         alert('Erreur')
         console.log(err)
       })
 
-      $scope.ontypechange = function (type) {
-        $scope.problemType = type.typeProbleme
-        $scope.duration = type.duree
-        $scope.setduration($scope.duration)
-      }
-
-      $scope.onsubmit = function () {
-        var objectToSend = {
-          typeProbleme: $scope.problemType,
-          duree: $scope.duration,
-          commentaire: $scope.comment,
-          user: $scope.user,
-          numPosteDA: $scope.numPosteDa,
-          adresseIPSopra: $scope.adresseIPSopra,
-          date: $scope.date
+      $scope.ondelete = function (type) {
+        var duree = TimeService.convertInMs(type.displaytime, type.unit)
+        var objectToDelete = {
+          id: type.id,
+          typeProbleme: type.typeProbleme,
+          duree: duree,
+          commentaire: type.commentaire,
+          user: type.user,
+          numPosteDA: type.numPosteDA,
+          adresseIPSopra: type.adresseIPSopra,
+          date: type.date
         }
         $scope.start()
-
         setTimeout(function () {
-          ProblemsService
-          .createProblem(objectToSend)
-          .then(function (problems) {
+          ProblemsService.deleteProblem(objectToDelete).then(function (typeProbleme) {
             $scope.stop()
-            alert('Well inserted')
+            alert('Well deleted')
+            var tableDeleted = _.remove($scope.problems, function (element) {
+              if (objectToDelete.id === element.id) {
+                return false
+              } else {
+                return true
+              }
+            })
+            $scope.problems = tableDeleted
           })
           .catch(function (err) {
             $scope.stop()
             alert('Erreur')
             console.log(err)
           })
-        }, 5000)
+        }, 3000)
       }
     }
   ])
@@ -2062,8 +2101,8 @@
     '$location',
     'PosteDaService',
     function ($scope, $location, PosteDaService) {
-      $scope.postesDa = []
       $scope.numPosteDa
+      $scope.postesDa = []
 
       PosteDaService.getPostesDa().then(function (posteDa) {
         $scope.postesDa = posteDa
@@ -2084,6 +2123,7 @@
         PosteDaService.createPosteDa(objectToSend)
         .then(function (posteDa) {
           alert('Well inserted')
+          objectToSend.id = posteDa._id
           $scope.postesDa.push(objectToSend)
         })
         .catch(function (err) {
@@ -2111,10 +2151,6 @@
           })
         }, 3000)
       }
-
-      $scope.goToRacePage = function () {
-        $location.path('/poste-da')
-      }
     }
   ])
 })();// eslint-disable-line semi
@@ -2128,7 +2164,8 @@
     'ProblemsService',
     'ProblemsTypeService',
     'PosteDaService',
-    function ($scope, ProblemsService, ProblemsTypeService, PosteDaService) {
+    'TimeService',
+    function ($scope, ProblemsService, ProblemsTypeService, PosteDaService, TimeService) {
       var initialValue = 2
       $scope.problemType
       $scope.duration
@@ -2137,8 +2174,8 @@
       $scope.comment
       $scope.user
       $scope.numPosteDa
-      $scope.postesDa = []
       $scope.adresseIPSopra
+      $scope.postesDa = []
       $scope.problems = []
       $scope.date = Date.now()
 
@@ -2147,7 +2184,7 @@
         $scope.problemIndex = initialValue
         $scope.problemType = $scope.problems[initialValue].typeProbleme
         $scope.duration = $scope.problems[initialValue].duree
-        $scope.setduration($scope.duration)
+        $scope.setvalue($scope.duration)
         $scope.comment = ''
         $scope.user = ''
         $scope.numPosteDa = ''
@@ -2166,16 +2203,27 @@
         console.log(err)
       })
 
+      $scope.setvalue = function (duration) {
+        $scope.unit = TimeService.getTimeUnit(duration)
+        $scope.displaytime = TimeService.computeDisplayTime(duration, $scope.unit)
+      }
+
+      $scope.computetime = function (value) {
+        $scope.duration = TimeService.convertInMs(value, $scope.unit)
+        return $scope.duration
+      }
+
       $scope.ontypechange = function (type) {
         $scope.problemType = type.typeProbleme
         $scope.duration = type.duree
-        $scope.setduration($scope.duration)
+        $scope.setvalue($scope.duration)
       }
 
       $scope.onsubmit = function () {
+        var duration = TimeService.convertInMs($scope.displaytime, $scope.unit)
         var objectToSend = {
           typeProbleme: $scope.problemType,
-          duree: $scope.duration,
+          duree: duration,
           commentaire: $scope.comment,
           user: $scope.user,
           numPosteDA: ($scope.numPosteDa).numPosteDA,
@@ -2183,7 +2231,6 @@
           date: $scope.date
         }
         $scope.start()
-
         setTimeout(function () {
           ProblemsService
           .createProblem(objectToSend)
@@ -2210,18 +2257,19 @@
     '$scope',
     'ProblemsTypeService',
     'TimeService',
-    function ($scope, ProblemsTypeService, TimeService) {
-      var initialValue = 2
-      $scope.problemType
+    'ConvertTableTimeService',
+    function ($scope, ProblemsTypeService, TimeService, ConvertTableTimeService) {
       $scope.duration
-      $scope.problemId
+      $scope.dureeAdded
+      $scope.typeProblemeAdded
+      $scope.durationAdded
+      $scope.unitAdded
       $scope.problems = []
+      $scope.problemsFormatted = []
 
       ProblemsTypeService.getProblemsType().then(function (problems) {
         $scope.problems = problems
-        $scope.problemIndex = initialValue
-        $scope.problemType = $scope.problems[initialValue].typeProbleme
-        $scope.duration = $scope.problems[initialValue].duree
+        $scope.problemsFormatted = ConvertTableTimeService.convertTableTime(problems)
       })
       .catch(function (err) {
         alert('Erreur')
@@ -2233,23 +2281,58 @@
         $scope.displaytime = TimeService.computeDisplayTime(duration, $scope.unit)
       }
 
-      $scope.oncreationtypeproblem = function () {
-        var objectToSend = {
-          typeProbleme: $scope.problemTypeCreation,
-          duree: $scope.durationCreation
+      $scope.ondelete = function (type) {
+        var objectToDelete = {
+          id: type.id,
+          typeProbleme: type.typeProbleme,
+          duree: type.duree
         }
-
+        $scope.start()
         setTimeout(function () {
-          ProblemsTypeService
-          .createProblemType(objectToSend)
-          .then(function (problems) {
-            alert('Well inserted')
+          ProblemsTypeService.deleteProblemType(objectToDelete).then(function (typeProbleme) {
+            $scope.stop()
+            alert('Well deleted')
+            var tableDeleted = _.remove($scope.problemsFormatted, function (element) {
+              if (objectToDelete.id === element.id) {
+                return false
+              } else {
+                return true
+              }
+            })
+            $scope.problemsFormatted = tableDeleted
           })
           .catch(function (err) {
+            $scope.stop()
             alert('Erreur')
             console.log(err)
           })
-        }, 5000)
+        }, 3000)
+      }
+
+      $scope.onclick = function () {
+        $scope.durationAdded = TimeService.convertInMs($scope.dureeAdded, $scope.unitAdded)
+        var objectToSend = {
+          typeProbleme: $scope.typeProblemeAdded,
+          duree: $scope.durationAdded
+        }
+        var objectToSendComputedTime = {
+          typeProbleme: $scope.typeProblemeAdded,
+          displaytime: $scope.dureeAdded,
+          unit: $scope.unitAdded
+        }
+        ProblemsTypeService
+        .createProblemType(objectToSend)
+        .then(function (problems) {
+          alert('Well inserted')
+          objectToSend.id = problems._id
+          objectToSendComputedTime.id = problems._id
+          $scope.problems.push(objectToSend)
+          $scope.problemsFormatted.push(objectToSendComputedTime)
+        })
+        .catch(function (err) {
+          alert('Erreur')
+          console.log(err)
+        })
       }
     }
   ])
@@ -2264,7 +2347,65 @@
         return /^\\?(0|[1-9]\d*)$/.test(str)
       }
     })
-})();// eslint-disable-line no-alert, quotes, semi
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.service('ConvertTableTimeService', [
+    'TimeService',
+    function (TimeService) {
+      this.convertTableTime = function (problems) {
+        var typeProblems = problems.map(function (problem) {
+          var unit = TimeService.getTimeUnit(problem.duree)
+          var displaytime = TimeService.computeDisplayTime(problem.duree, unit)
+          var typeProblemeTimeFormatted = {
+            typeProbleme: problems.typeProbleme,
+            id: problems.id,
+            displaytime: displaytime,
+            unit: unit
+          }
+          typeProblemeTimeFormatted['typeProbleme'] = problem.typeProbleme
+          typeProblemeTimeFormatted['id'] = problem.id
+          typeProblemeTimeFormatted['displaytime'] = displaytime
+          typeProblemeTimeFormatted['unit'] = unit
+          return typeProblemeTimeFormatted
+        })
+        return typeProblems
+      }
+
+      this.convertTableTimeForAllProblems = function (problems) {
+        var typeProblems = problems.map(function (problem) {
+          var unit = TimeService.getTimeUnit(problem.duree)
+          var displaytime = TimeService.computeDisplayTime(problem.duree, unit)
+          var typeProblemeTimeFormatted = {
+            typeProbleme: problems.typeProbleme,
+            id: problems.id,
+            displaytime: displaytime,
+            unit: unit,
+            commentaire: problems.commentaire,
+            user: problems.user,
+            numPosteDA: problems.numPosteDA,
+            adresseIPSopra: problems.adresseIPSopra,
+            date: problems.date
+          }
+          typeProblemeTimeFormatted['typeProbleme'] = problem.typeProbleme
+          typeProblemeTimeFormatted['id'] = problem.id
+          typeProblemeTimeFormatted['displaytime'] = displaytime
+          typeProblemeTimeFormatted['unit'] = unit
+          typeProblemeTimeFormatted['commentaire'] = problem.commentaire
+          typeProblemeTimeFormatted['user'] = problem.user
+          typeProblemeTimeFormatted['numPosteDA'] = problem.numPosteDA
+          typeProblemeTimeFormatted['adresseIPSopra'] = problem.adresseIPSopra
+          typeProblemeTimeFormatted['date'] = problem.date
+          return typeProblemeTimeFormatted
+        })
+        return typeProblems
+      }
+    }
+  ])
+})();// eslint-disable-line semi
 
 (function () {
   'use strict'
@@ -2343,8 +2484,7 @@
       }
     }
   ])
-})();// eslint-disable-line no-alert, quotes, semi
-
+})();// eslint-disable-line semi
 
 (function () {
   'use strict'
@@ -2380,9 +2520,23 @@
           })
         return deferred.promise
       }
+
+      this.deleteProblem = function (data) {
+        var deferred = $q.defer()
+        var ProblemId = data.id
+        var urlDeleteProblem = apiUrlProblems + '/' + ProblemId
+        $http.delete(urlDeleteProblem)
+          .then(function (httpInfo) {
+            deferred.resolve(httpInfo.data)
+          })
+          .catch(function (err) {
+            deferred.reject(err)
+          })
+        return deferred.promise
+      }
     }
   ])
-})();// eslint-disable-line no-alert, quotes, semi
+})();// eslint-disable-line semi
 
 (function () {
   'use strict'
@@ -2434,7 +2588,7 @@
       }
     }
   ])
-})();// eslint-disable-line no-alert, quotes, semi
+})();// eslint-disable-line semi
 
 (function () {
   'use strict'
@@ -2487,18 +2641,20 @@
       this.convertInMs = function (displaytime, unit) {
         var duration
         var unknownUnit = 'Unknown unit'
-        switch (unit) {
-          case configUnitTime.seconds :
-            duration = displaytime * 1000
-            break
-          case configUnitTime.minutes :
-            duration = displaytime * 60000
-            break
-          case configUnitTime.hours :
-            duration = displaytime * 3600000
-            break
-          default :
-            throw unknownUnit
+        if (displaytime) {
+          switch (unit) {
+            case configUnitTime.seconds :
+              duration = displaytime * 1000
+              break
+            case configUnitTime.minutes :
+              duration = displaytime * 60000
+              break
+            case configUnitTime.hours :
+              duration = displaytime * 3600000
+              break
+            default :
+              throw unknownUnit
+          }
         }
         return duration
       }
@@ -2512,6 +2668,81 @@
         }
       }
     })
-})();// eslint-disable-line no-alert, quotes, semi
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+  module.filter('periodDate',
+    function () {
+      return function (array, minDate, maxDate) {
+        var minTimestamp = new Date(minDate).getTime()
+        var maxTimestamp = new Date(maxDate).getTime()
+        var dayOffset = 86400000 // 24 * 3600 * 1000
+        var arrayGenerated = array.filter(function (element) {
+          if (isNaN(minTimestamp) && isNaN(maxTimestamp)) {
+            return true
+          }
+          if (!isNaN(minTimestamp) && isNaN(maxTimestamp)) {
+            return element.date >= minTimestamp
+          }
+          if (isNaN(minTimestamp) && !isNaN(maxTimestamp)) {
+            return element.date <= (maxTimestamp + dayOffset) // add dayoffset to include the chosen date
+          }
+          if (!isNaN(minTimestamp) && !isNaN(maxTimestamp)) {
+            return element.date >= minTimestamp && element.date <= (maxTimestamp + dayOffset)
+          }
+          return true
+        })
+        return arrayGenerated
+      }
+    })
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+  module.filter('periodDuration',
+    ['TimeService', function (TimeService) {
+      return function (array, minDuration, maxDuration, unitMin, unitMax) {
+        var displaytimemin = TimeService.convertInMs(minDuration, unitMin)
+        var displaytimemax = TimeService.convertInMs(maxDuration, unitMax)
+        var arrayGenerated = array.filter(function (element) {
+          if (isNaN(displaytimemin) && isNaN(displaytimemax)) {
+            return true
+          }
+          if (!isNaN(displaytimemin) && isNaN(displaytimemax)) {
+            return element.duree >= displaytimemin
+          }
+          if (isNaN(displaytimemin) && !isNaN(displaytimemax)) {
+            return element.duree <= displaytimemax
+          }
+          if (!isNaN(displaytimemin) && !isNaN(displaytimemax)) {
+            return element.duree >= displaytimemin && element.duree <= displaytimemax
+          }
+          return true
+        })
+        return arrayGenerated
+      }
+    }]
+  )
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+  module.filter('timeDisplayed',
+    ['TimeService',
+      function (TimeService) {
+        return function (element) {
+          var unit = TimeService.getTimeUnit(element)
+          var displaytime = TimeService.computeDisplayTime(element, unit)
+          var entiretime = displaytime + unit
+          return entiretime
+        }
+      }
+    ]
+  )
+})();// eslint-disable-line semi
 
 //# sourceMappingURL=all.js.map

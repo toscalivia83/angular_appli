@@ -7,7 +7,8 @@
     'ProblemsService',
     'ProblemsTypeService',
     'PosteDaService',
-    function ($scope, ProblemsService, ProblemsTypeService, PosteDaService) {
+    'TimeService',
+    function ($scope, ProblemsService, ProblemsTypeService, PosteDaService, TimeService) {
       var initialValue = 2
       $scope.problemType
       $scope.duration
@@ -16,8 +17,8 @@
       $scope.comment
       $scope.user
       $scope.numPosteDa
-      $scope.postesDa = []
       $scope.adresseIPSopra
+      $scope.postesDa = []
       $scope.problems = []
       $scope.date = Date.now()
 
@@ -26,7 +27,7 @@
         $scope.problemIndex = initialValue
         $scope.problemType = $scope.problems[initialValue].typeProbleme
         $scope.duration = $scope.problems[initialValue].duree
-        $scope.setduration($scope.duration)
+        $scope.setvalue($scope.duration)
         $scope.comment = ''
         $scope.user = ''
         $scope.numPosteDa = ''
@@ -45,16 +46,27 @@
         console.log(err)
       })
 
+      $scope.setvalue = function (duration) {
+        $scope.unit = TimeService.getTimeUnit(duration)
+        $scope.displaytime = TimeService.computeDisplayTime(duration, $scope.unit)
+      }
+
+      $scope.computetime = function (value) {
+        $scope.duration = TimeService.convertInMs(value, $scope.unit)
+        return $scope.duration
+      }
+
       $scope.ontypechange = function (type) {
         $scope.problemType = type.typeProbleme
         $scope.duration = type.duree
-        $scope.setduration($scope.duration)
+        $scope.setvalue($scope.duration)
       }
 
       $scope.onsubmit = function () {
+        var duration = TimeService.convertInMs($scope.displaytime, $scope.unit)
         var objectToSend = {
           typeProbleme: $scope.problemType,
-          duree: $scope.duration,
+          duree: duration,
           commentaire: $scope.comment,
           user: $scope.user,
           numPosteDA: ($scope.numPosteDa).numPosteDA,
@@ -62,7 +74,6 @@
           date: $scope.date
         }
         $scope.start()
-
         setTimeout(function () {
           ProblemsService
           .createProblem(objectToSend)

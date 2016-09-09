@@ -1,5 +1,5 @@
 (function () {
   'use strict'
 
-  angular.module('ProblemsTest', ['ngRoute', 'ngSanitize', 'ngCsv', 'pascalprecht.translate'])
+  angular.module('ProblemsTest', ['ngRoute', 'ngSanitize', 'pascalprecht.translate', 'ngMaterial'])
 })();// eslint-disable-line semi

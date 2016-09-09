@@ -1,6 +1,7 @@
 .header__header-link:hover, .header__header-link:focus {
     background: #16a085;
 }
+
 .header__header-link {
     text-decoration: none;
     display: inline-block;
@@ -8,4 +9,13 @@
     padding: 8px 20px;
     color: #FFF;
     transition: all .3s;
+}
+
+.header__header-link_download {
+  display: inline-block;
+  vertical-align: middle;
+  position: absolute;
+  right: 0;
+  margin-right: 5px;
+  background: #708090;
 }

@@ -32,6 +32,20 @@
           })
         return deferred.promise
       }
+
+      this.deleteProblem = function (data) {
+        var deferred = $q.defer()
+        var ProblemId = data.id
+        var urlDeleteProblem = apiUrlProblems + '/' + ProblemId
+        $http.delete(urlDeleteProblem)
+          .then(function (httpInfo) {
+            deferred.resolve(httpInfo.data)
+          })
+          .catch(function (err) {
+            deferred.reject(err)
+          })
+        return deferred.promise
+      }
     }
   ])
-})();// eslint-disable-line no-alert, quotes, semi
+})();// eslint-disable-line semi

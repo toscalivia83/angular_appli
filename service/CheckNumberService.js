@@ -7,4 +7,4 @@
         return /^\\?(0|[1-9]\d*)$/.test(str)
       }
     })
-})();// eslint-disable-line no-alert, quotes, semi
+})();// eslint-disable-line semi

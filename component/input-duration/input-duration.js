@@ -7,14 +7,14 @@
       return {
         restrict: 'E',
         scope: {
-          duration: '=problemsTypeDuree',
-          setvalue: '=setvalue'
+          setvalue: '=setvalue',
+          label: '@label',
+          val: '=val',
+          placeholder: '@placeholder',
+          unit: '=unit'
         },
         controller: ['$scope', 'TimeService', function ($scope, TimeService) {
-          $scope.setvalue = function (duration) {
-            $scope.unit = TimeService.getTimeUnit(duration)
-            $scope.displaytime = TimeService.computeDisplayTime(duration, $scope.unit)
-          }
+          $scope.unit = 's'
 
           $scope.computetime = function (value) {
             $scope.duration = TimeService.convertInMs(value, $scope.unit)

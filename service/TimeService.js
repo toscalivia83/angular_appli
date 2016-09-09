@@ -49,18 +49,20 @@
       this.convertInMs = function (displaytime, unit) {
         var duration
         var unknownUnit = 'Unknown unit'
-        switch (unit) {
-          case configUnitTime.seconds :
-            duration = displaytime * 1000
-            break
-          case configUnitTime.minutes :
-            duration = displaytime * 60000
-            break
-          case configUnitTime.hours :
-            duration = displaytime * 3600000
-            break
-          default :
-            throw unknownUnit
+        if (displaytime) {
+          switch (unit) {
+            case configUnitTime.seconds :
+              duration = displaytime * 1000
+              break
+            case configUnitTime.minutes :
+              duration = displaytime * 60000
+              break
+            case configUnitTime.hours :
+              duration = displaytime * 3600000
+              break
+            default :
+              throw unknownUnit
+          }
         }
         return duration
       }
@@ -74,4 +76,4 @@
         }
       }
     })
-})();// eslint-disable-line no-alert, quotes, semi
+})();// eslint-disable-line semi

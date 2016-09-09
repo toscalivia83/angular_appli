@@ -1,20 +1,5 @@
-<!-- <my-header header-title="{{ 'PROBLEMS-TITLE' | translate }}" first-button-label="{{ 'POSTES-DA-TITLE' | translate }}" second-button-label="{{ 'PROBLEMS-TITLE' | translate }}" path-header="{{'PATH-POSTE-DA' | translate }}"></my-header> -->
-<!-- <my-radiolist-problems problems-type="problems" ondatachange="" idvalue="problemIndex"></my-radiolist-problems>
-<my-duration problems-type-duree="duration" setvalue="setduration"></my-duration>
- -->
-<!-- <div class="container problems" style="width:500px;">
-  <ul>
-    <li ng-repeat="x in problems">
-      <input type="radio" name="typeProblem" id="{{$index}}" ng-value="$index" ng-model="itemId">
-      <label for="{{$index}}">
-      <div class="cross"></div>
-      Probleme : {{x.typeProbleme}} - Duree : {{x.duree}} ms
-      </label> 
-    </li>
-  </ul>
-</div>
+<my-header header-title="{{ 'PROBLEMS-TYPE-TITLE' | translate }}" path-header="{{'PATH-POSTE-DA' | translate }}"></my-header>
+<my-creation-type-probleme valduree="dureeAdded" valtypeproblem="typeProblemeAdded" onclick="onclick" placeholderduree="{{'DURATION-CREATION' | translate}}" placeholdertypeproblem="{{'TYPE-PROBLEME-CREATION' | translate}}" labelduree="{{'DURATION-CREATION' | translate}}" labeltypeproblem="{{'TYPE-PROBLEME-CREATION' | translate}}" durationAdded="durationAdded" unit="unitAdded" unitAdded="unitAdded"></my-creation-type-probleme>
+<my-radiolist-type-problems problems-formatted="problemsFormatted" ondelete="ondelete"></my-radiolist-type-problems>
+<my-loader start="start" stop="stop"></my-loader>
 
-<my-input-poste-da val="numPosteDa" fct="oncreate"></my-input-poste-da>
-
-<my-button onclick="onsubmit" btn-label="DELETE" btn-width="" btn-height="" class="block"></my-button>
-<my-loader start="start" stop="stop"></my-loader> -->

@@ -13,7 +13,7 @@ var uglify = require('gulp-uglify')
 var browserSync = require('browser-sync').create()
 var reload = browserSync.reload
 
-var jsfiles = ['app.js', 'component/**/*.js', 'config/**/*.js', 'controller/**/*.js', 'data/**/*.js', 'service/**/*.js', 'comment/**/*.js', 'button/**/*.js', 'adresseIPSopra/**/*.js', 'numPosteDA/**/*.js', 'user/**/*.js']
+var jsfiles = ['app.js', 'component/**/*.js', 'config/**/*.js', 'controller/**/*.js', 'data/**/*.js', 'service/**/*.js', 'filter/**/*.js']
 var htmlfiles = ['index.html', 'component/**/*.html', 'view/**/*.html']
 var scssfiles = ['global_scss/*.scss', 'component/**/*.scss']
 

@@ -7,8 +7,8 @@
     '$location',
     'PosteDaService',
     function ($scope, $location, PosteDaService) {
-      $scope.postesDa = []
       $scope.numPosteDa
+      $scope.postesDa = []
 
       PosteDaService.getPostesDa().then(function (posteDa) {
         $scope.postesDa = posteDa
@@ -29,6 +29,7 @@
         PosteDaService.createPosteDa(objectToSend)
         .then(function (posteDa) {
           alert('Well inserted')
+          objectToSend.id = posteDa._id
           $scope.postesDa.push(objectToSend)
         })
         .catch(function (err) {
@@ -55,10 +56,6 @@
             console.log(err)
           })
         }, 3000)
-      }
-
-      $scope.goToRacePage = function () {
-        $location.path('/poste-da')
       }
     }
   ])

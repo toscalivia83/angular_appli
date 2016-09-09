@@ -2,7 +2,7 @@
   "name": "citrix-reporter",
   "version": "1.0.0",
   "description": "report citrix defects",
-  "main": "home.html",
+  "main": "index.html",
   "scripts": {
     "start": "http-server -p 8085",
     "watch": "gulp watch",

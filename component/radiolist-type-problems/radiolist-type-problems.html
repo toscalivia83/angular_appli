@@ -1,0 +1,12 @@
+<div class="container problems" style="width:500px;">
+  <ul>
+    <li ng-repeat="x in problemsFormatted">
+      <div class="cross" ng-click="ondelete(x)"></div>
+      <div class="radiolist-type-problems" >
+        {{'PROBLEM' | translate}} : {{x.typeProbleme}}<br/>
+        {{'PROBLEM-DURATION-BY-DEFAULT' | translate}} : {{x.displaytime}}{{x.unit}}
+      <div>
+      </label> 
+    </li>
+  </ul>
+</div>

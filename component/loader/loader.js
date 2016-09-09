@@ -29,10 +29,6 @@
           }
 
           // SpringSystem
-          // ------------
-          // **SpringSystem** is a set of Springs that all run on the same physics
-          // timing loop. To get started with a Rebound animation you first
-          // create a new SpringSystem and then add springs to it.
           var SpringSystem = rebound.SpringSystem = function SpringSystem (looper) {
             this._springRegistry = {}
             this._activeSprings = []

@@ -6,18 +6,19 @@
     '$scope',
     'ProblemsTypeService',
     'TimeService',
-    function ($scope, ProblemsTypeService, TimeService) {
-      var initialValue = 2
-      $scope.problemType
+    'ConvertTableTimeService',
+    function ($scope, ProblemsTypeService, TimeService, ConvertTableTimeService) {
       $scope.duration
-      $scope.problemId
+      $scope.dureeAdded
+      $scope.typeProblemeAdded
+      $scope.durationAdded
+      $scope.unitAdded
       $scope.problems = []
+      $scope.problemsFormatted = []
 
       ProblemsTypeService.getProblemsType().then(function (problems) {
         $scope.problems = problems
-        $scope.problemIndex = initialValue
-        $scope.problemType = $scope.problems[initialValue].typeProbleme
-        $scope.duration = $scope.problems[initialValue].duree
+        $scope.problemsFormatted = ConvertTableTimeService.convertTableTime(problems)
       })
       .catch(function (err) {
         alert('Erreur')
@@ -29,23 +30,58 @@
         $scope.displaytime = TimeService.computeDisplayTime(duration, $scope.unit)
       }
 
-      $scope.oncreationtypeproblem = function () {
-        var objectToSend = {
-          typeProbleme: $scope.problemTypeCreation,
-          duree: $scope.durationCreation
+      $scope.ondelete = function (type) {
+        var objectToDelete = {
+          id: type.id,
+          typeProbleme: type.typeProbleme,
+          duree: type.duree
         }
-
+        $scope.start()
         setTimeout(function () {
-          ProblemsTypeService
-          .createProblemType(objectToSend)
-          .then(function (problems) {
-            alert('Well inserted')
+          ProblemsTypeService.deleteProblemType(objectToDelete).then(function (typeProbleme) {
+            $scope.stop()
+            alert('Well deleted')
+            var tableDeleted = _.remove($scope.problemsFormatted, function (element) {
+              if (objectToDelete.id === element.id) {
+                return false
+              } else {
+                return true
+              }
+            })
+            $scope.problemsFormatted = tableDeleted
           })
           .catch(function (err) {
+            $scope.stop()
             alert('Erreur')
             console.log(err)
           })
-        }, 5000)
+        }, 3000)
+      }
+
+      $scope.onclick = function () {
+        $scope.durationAdded = TimeService.convertInMs($scope.dureeAdded, $scope.unitAdded)
+        var objectToSend = {
+          typeProbleme: $scope.typeProblemeAdded,
+          duree: $scope.durationAdded
+        }
+        var objectToSendComputedTime = {
+          typeProbleme: $scope.typeProblemeAdded,
+          displaytime: $scope.dureeAdded,
+          unit: $scope.unitAdded
+        }
+        ProblemsTypeService
+        .createProblemType(objectToSend)
+        .then(function (problems) {
+          alert('Well inserted')
+          objectToSend.id = problems._id
+          objectToSendComputedTime.id = problems._id
+          $scope.problems.push(objectToSend)
+          $scope.problemsFormatted.push(objectToSendComputedTime)
+        })
+        .catch(function (err) {
+          alert('Erreur')
+          console.log(err)
+        })
       }
     }
   ])

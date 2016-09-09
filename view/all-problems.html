@@ -1,8 +1,3 @@
-<!-- <my-header header-title="{{ 'POSTES-DA-TITLE' | translate}}" first-button-label="{{ 'PROBLEMS-TITLE' | translate }}" second-button-label="{{ 'POSTES-DA-TITLE' | translate }}" third-button-label="{{ 'PROBLEMS-TYPE-TITLE' | translate }}" path-header="{{'PATH-PROBLEMS' | translate }}"></my-header>
-  <ul>
-    <li ng-repeat="x in problems">
-      <option for="{{$index}}">user: {{x.user}} - numPosteDA: {{x.numPosteDA}} - adresseIPSopra: {{x.adresseIPSopra}} - typeProbleme: {{x.typeProbleme}} - commentaire: {{x.comment}} - duree: {{x.duree}} - date: {{x.date}}</option>
-      </label> 
-    </li>
-  </ul>
- -->
+<my-header header-title="{{ 'ALL-PROBLEMS-TITLE' | translate}}" path-header="{{'PATH-PROBLEMS' | translate }}"></my-header>
+<my-list-of-problems problems="problems" ondelete="ondelete"></my-list-of-problems>
+<my-loader start="start" stop="stop"></my-loader>
