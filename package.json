@@ -4,7 +4,7 @@
   "description": "report citrix defects",
   "main": "index.html",
   "scripts": {
-    "start": "http-server -p 8085",
+    "start": "npm run build",
     "watch": "gulp watch",
     "build": "gulp build",
     "serve": "gulp serve"

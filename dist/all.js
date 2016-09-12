@@ -8,6 +8,46 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
+  module.directive('myComboboxPosteDa', [function () {
+    return {
+      restrict: 'E',
+      scope: {
+        postesDa: '=postesDa',
+        label: '@label',
+        val: '=val'
+      },
+      templateUrl: '/component/combobox/combobox.html'
+    }
+  }])
+})();// eslint-disable-line semi
+
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myCreationInput', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          onclick: '=onclick',
+          placeholder: '@placeholder'
+        },
+        templateUrl: '/component/creation-input/creation-input.html',
+        controller: function ($scope) {
+        }
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
   module.directive('myButton', ['CheckNumberService',
     function (CheckNumberService) {
       return {
@@ -50,19 +90,61 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myComboboxPosteDa', [function () {
-    return {
-      restrict: 'E',
-      scope: {
-        postesDa: '=postesDa',
-        label: '@label',
-        val: '=val'
-      },
-      templateUrl: '/component/combobox/combobox.html'
+  module.directive('myCustomInput', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          fct: '=fct',
+          placeholder: '@placeholder'
+        },
+        templateUrl: '/component/custom-input/custom-input.html'
+      }
     }
-  }])
+  ])
 })();// eslint-disable-line semi
 
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myCustomTextarea', ['CheckNumberService',
+    function (CheckNumberService) {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          fct: '=fct'
+        },
+        templateUrl: '/component/custom-textarea/custom-textarea.html',
+        link: function ($scope, element, attributes) {
+          if (CheckNumberService.isNormalInteger(attributes.btnWidth) === true) {
+            var buttonFirstChild = element.children(0)
+            var btnWidth = attributes.btnWidth + 'px'
+
+            buttonFirstChild.css('width', btnWidth)
+          } else {
+            var buttonSecondChild = element.children(0)
+            buttonSecondChild.css('width', '350px')
+          }
+
+          if (CheckNumberService.isNormalInteger(attributes.btnHeight) === true) {
+            var buttonFirstChildHeight = element.children(0)
+            var btnHeight = attributes.btnHeight + 'px'
+
+            buttonFirstChildHeight.css('height', btnHeight)
+          } else {
+            var buttonSecondChildHeight = element.children(0)
+            buttonSecondChildHeight.css('height', '150px')
+          }
+        }
+      }
+    }
+  ])
+})();// eslint-disable-line semi
 
 (function () {
   'use strict'
@@ -90,48 +172,6 @@
             $scope.durationAdded = TimeService.convertInMs($scope.valduree, $scope.unit)
           }
         }]
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myCreationInput', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          val: '=val',
-          label: '@label',
-          onclick: '=onclick',
-          placeholder: '@placeholder'
-        },
-        templateUrl: '/component/creation-input/creation-input.html',
-        controller: function ($scope) {
-        }
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myCustomInput', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          val: '=val',
-          label: '@label',
-          fct: '=fct',
-          placeholder: '@placeholder'
-        },
-        templateUrl: '/component/custom-input/custom-input.html'
       }
     }
   ])
@@ -183,65 +223,6 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myCustomTextarea', ['CheckNumberService',
-    function (CheckNumberService) {
-      return {
-        restrict: 'E',
-        scope: {
-          val: '=val',
-          label: '@label',
-          fct: '=fct'
-        },
-        templateUrl: '/component/custom-textarea/custom-textarea.html',
-        link: function ($scope, element, attributes) {
-          if (CheckNumberService.isNormalInteger(attributes.btnWidth) === true) {
-            var buttonFirstChild = element.children(0)
-            var btnWidth = attributes.btnWidth + 'px'
-
-            buttonFirstChild.css('width', btnWidth)
-          } else {
-            var buttonSecondChild = element.children(0)
-            buttonSecondChild.css('width', '350px')
-          }
-
-          if (CheckNumberService.isNormalInteger(attributes.btnHeight) === true) {
-            var buttonFirstChildHeight = element.children(0)
-            var btnHeight = attributes.btnHeight + 'px'
-
-            buttonFirstChildHeight.css('height', btnHeight)
-          } else {
-            var buttonSecondChildHeight = element.children(0)
-            buttonSecondChildHeight.css('height', '150px')
-          }
-        }
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myHeaderLink', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          val: '=val',
-          label: '@label',
-          url: '@url'
-        },
-        templateUrl: '/component/header-link/header-link.html'
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
   module.directive('myDuration', [
     function () {
       return {
@@ -277,27 +258,6 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myListOfProblems', [function () {
-    return {
-      restrict: 'E',
-      scope: {
-        problems: '=problems',
-        ondelete: '=ondelete'
-      },
-      templateUrl: '/component/list-problems/list-problems.html',
-      controller: ['$scope', function ($scope) {
-        $scope.execDates = function () {
-          $scope.myDate = new Date()
-        }
-      }]
-    }
-  }])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
   module.directive('myPostesDa', [function () {
     return {
       restrict: 'E',
@@ -315,15 +275,38 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myRadiolistProblems', [ function () {
+  module.directive('myHeaderLink', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          url: '@url'
+        },
+        templateUrl: '/component/header-link/header-link.html'
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myListOfProblems', [function () {
     return {
       restrict: 'E',
       scope: {
-        problems: '=problemsType',
-        ondatachange: '=ondatachange',
-        itemId: '=idvalue'
+        problems: '=problems',
+        ondelete: '=ondelete'
       },
-      templateUrl: '/component/radiolist-problems/radiolist-problems.html'
+      templateUrl: '/component/list-problems/list-problems.html',
+      controller: ['$scope', function ($scope) {
+        $scope.execDates = function () {
+          $scope.myDate = new Date()
+        }
+      }]
     }
   }])
 })();// eslint-disable-line semi
@@ -1929,6 +1912,23 @@
         itemId: '=idvalue'
       },
       templateUrl: '/component/radiolist-type-problems/radiolist-type-problems.html'
+    }
+  }])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myRadiolistProblems', [ function () {
+    return {
+      restrict: 'E',
+      scope: {
+        problems: '=problemsType',
+        ondatachange: '=ondatachange',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/radiolist-problems/radiolist-problems.html'
     }
   }])
 })();// eslint-disable-line semi

@@ -76,6 +76,12 @@ gulp.task('prod', function () {
 
 gulp.task('js-watch', ['scripts', 'build-scss'], browserSync.reload)
 
+gulp.task('build', ['scripts', 'build-scss'], function () {
+  browserSync.init({
+    server: './'
+  })
+})
+
 gulp.task('serve', ['scripts', 'build-scss'], function () {
   browserSync.init({
     server: './'
