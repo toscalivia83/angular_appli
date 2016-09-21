@@ -1,50 +1,53 @@
 <div>
-  <div class="list-problems_user_title list-problems">{{ 'PROBLEM-USER' | translate }}
-    <label class="list-problems_title list-problems_label"><input ng-model="search.user" placeholder="{{ 'PROBLEM-USER' | translate }}" class="list-problems__input"></label><br/>
-  </div>
-  <div class="list-problems_defaultwidth_title list-problems">{{ 'PROBLEM-NUM-POSTE-DA' | translate }}
-    <label class="list-problems_title list-problems_label"><input ng-model="search.numPosteDA" placeholder="{{ 'PROBLEM-NUM-POSTE-DA' | translate }}" class="list-problems__input"></label><br/>
-  </div>
-  <div class="list-problems_defaultwidth_title list-problems">{{ 'PROBLEM-ADRESS-IP' | translate }}
-    <label class="list-problems list-problems_title list-problems_label"><input ng-model="search.adresseIPSopra" placeholder="{{ 'PROBLEM-ADRESS-IP' | translate }}" class="list-problems__input"></label><br/>
-  </div>
-  <div class="list-problems_defaultwidth_title list-problems">{{ 'PROBLEM-TYPE' | translate }}
-    <label class="list-problems list-problems_title list-problems_label"><input ng-model="search.typeProbleme" placeholder="{{ 'PROBLEM-TYPE' | translate }}" class="list-problems__input"></label><br/>
-  </div>
-  <div class="list-problems_textarea_title">{{ 'PROBLEM-COMMENT' | translate }}
-    <label class="list-problems_title list-problems_label"><input ng-model="search.commentaire" placeholder="{{ 'PROBLEM-COMMENT' | translate }}" class="list-problems__input"></label><br/>
-  </div>
-  <div class="list-problems_inline">
-    <div class="list-problems_min_date">
-      <div>{{'MIN-DURATION' | translate}}</div>
-      <div>
-        <div class="list-problems-div_date-duration">
-          <label class="list-problems-input_date-duration"><input ng-model="minDuration" placeholder="{{ 'PROBLEM-DURATION' | translate }}" class="list-problems__input"></label><br/>
-        </div>
-        <div class="list-problems-div_date-unit">
-          <select name="unitMin" id="unitMin" ng-model="unitMin" style="display:inline-block;">
-            <option value="s">{{'SECONDS-UNIT' | translate}}</option>
-            <option value="m">{{'MINUTES-UNIT' | translate}}</option>
-            <option value="h">{{'HOURS-UNIT' | translate}}</option>
-          </select><br>
-        </div>
-      </div>
-    </div>
-    <div class="list-problems_max_date">
-      <div>{{'MAX-DURATION' | translate}}</div>
-      <div  class="list-problems-div_date-duration">
-        <label class="list-problems-input_date-duration"><input ng-model="maxDuration" placeholder="{{ 'PROBLEM-DURATION' | translate }}" class="list-problems__input"></label><br/>
-      </div>
+  <md-input-container  class="list-problems_user list-problems">
+    <label>{{ 'PROBLEM-USER' | translate }}</label>
+    <input ng-model="search.user">
+  </md-input-container>
+  <md-input-container class="list-problems_defaultwidth list-problems">
+    <label>{{ 'PROBLEM-NUM-POSTE-DA' | translate }}</label>
+    <input ng-model="search.numPosteDA">
+  </md-input-container>
+  <md-input-container class="list-problems_defaultwidth list-problems">
+    <label>{{ 'PROBLEM-ADRESS-IP' | translate }}</label>
+    <input ng-model="search.adresseIPSopra">
+  </md-input-container>
+  <md-input-container class="list-problems_defaultwidth list-problems">
+    <label>{{ 'PROBLEM-TYPE' | translate }}</label>
+    <input ng-model="search.typeProbleme">
+  </md-input-container>
+  <md-input-container class="list-problems_textarea list-problems">
+    <label>{{ 'PROBLEM-COMMENT' | translate }}</label>
+    <input ng-model="search.commentaire">
+  </md-input-container>
+  <div class="list-problems_durations">
+    <div class="list-problems__first-duration">
+      <md-input-container>
+        <label>{{'MIN-DURATION' | translate}}</label>
+        <input ng-model="minDuration" class="md-input-container__input">
+      </md-input-container>
       <div class="list-problems-div_date-unit">
-        <select name="unitMax" id="unitMax" ng-model="unitMax" style="display:inline-block;">
-          <option value="s">{{'SECONDS-UNIT' | translate}}</option>
-          <option value="m">{{'MINUTES-UNIT' | translate}}</option>
-          <option value="h">{{'HOURS-UNIT' | translate}}</option>
-        </select><br>
+        <md-select ng-model="unitMin" class="md-no-underline" placeholder="Unité">
+          <md-option value="s">{{'SECONDS-UNIT' | translate}}</md-option>
+          <md-option value="m">{{'MINUTES-UNIT' | translate}}</md-option>
+          <md-option value="h">{{'HOURS-UNIT' | translate}}</md-option>
+        </md-select>
+      </div>
+    </div>
+    <div class="list-problems__second-duration">
+      <md-input-container>
+        <label>{{'MAX-DURATION' | translate}}</label>
+        <input ng-model="maxDuration">
+      </md-input-container>
+      <div class="list-problems-div_date-unit">
+        <md-select ng-model="unitMin" class="md-no-underline" placeholder="Unité">
+          <md-option value="s">{{'SECONDS-UNIT' | translate}}</md-option>
+          <md-option value="m">{{'MINUTES-UNIT' | translate}}</md-option>
+          <md-option value="h">{{'HOURS-UNIT' | translate}}</md-option>
+        </md-select>
       </div>
     </div>
   </div>
-  <div class="list-problems_inline list_problems-date">
+  <div class="list-problems_dates">
     <div flex-gt-xs="">
       <md-datepicker ng-model="minDate" md-placeholder="{{'MIN-DATE' | translate}}"></md-datepicker>
     </div>

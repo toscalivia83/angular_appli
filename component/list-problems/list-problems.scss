@@ -98,5 +98,24 @@
 
 .list-problems-div_date-unit {
   display: inline-block;
+  vertical-align: middle;
+}
+
+.list-problems__second-duration {
+  display:block; 
   vertical-align: top;
+}
+
+.list-problems__first-duration {
+  height: 50px;
+}
+
+.list-problems_durations {
+  display: inline-block;
+}
+
+.list-problems_dates {
+  display: inline-block; 
+  vertical-align: top; 
+  margin-top: 25px;
 }

@@ -22,17 +22,17 @@
   }
 }
 
-div label {
-  font-size: 1.25em;
-  color: #aaa;
-}
-
 .input-duration__input {
   visibility: hidden;
 }
 
 input[type="radio"]:checked {
     color: #fff;
+}
+
+.input-duration__input__label {
+  font-size: 1.25em;
+  color: #aaa;
 }
 
 .check {

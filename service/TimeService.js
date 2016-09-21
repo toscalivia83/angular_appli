@@ -2,14 +2,8 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  var configUnitTime = {
-    seconds: 's',
-    minutes: 'm',
-    hours: 'h'
-  }
-
   module.service('TimeService',
-    function () {
+    ['unitTimeInProblemAdded', 'timeInMs', function (unitTimeInProblemAdded, timeInMs) {
       this.getTimeUnit = function (duration) {
         var unit
         var invalidDuration = 'Duration is invalid'
@@ -18,11 +12,11 @@
         }
 
         if (duration < 59999) {
-          unit = configUnitTime.seconds
+          unit = unitTimeInProblemAdded.seconds
         } else if (duration < 3599999) {
-          unit = configUnitTime.minutes
+          unit = unitTimeInProblemAdded.minutes
         } else {
-          unit = configUnitTime.hours
+          unit = unitTimeInProblemAdded.hours
         }
         return unit
       }
@@ -31,14 +25,14 @@
         var displaytime
         var unknowUnit = 'Unknown unit'
         switch (unit) {
-          case configUnitTime.seconds :
-            displaytime = Math.ceil(duration / 1000)
+          case unitTimeInProblemAdded.seconds :
+            displaytime = Math.ceil(duration / timeInMs.seconds)
             break
-          case configUnitTime.minutes :
-            displaytime = Math.ceil(duration / 60000)
+          case unitTimeInProblemAdded.minutes :
+            displaytime = Math.ceil(duration / timeInMs.minutes)
             break
-          case configUnitTime.hours :
-            displaytime = Math.ceil(duration / 3600000)
+          case unitTimeInProblemAdded.hours :
+            displaytime = Math.ceil(duration / timeInMs.hours)
             break
           default :
             throw unknowUnit
@@ -46,19 +40,37 @@
         return displaytime
       }
 
+      this.getTimeAccordingToUnit = function (duration) {
+        var reste
+
+        var hourDuration = Math.floor(duration / timeInMs.hours)
+        reste = duration % timeInMs.hours
+
+        var minuteDuration = Math.floor(reste / timeInMs.minutes)
+        reste = reste % timeInMs.minutes
+
+        var secondDuration = Math.round(reste / timeInMs.seconds)
+
+        return {
+          hours: hourDuration,
+          minutes: minuteDuration,
+          seconds: secondDuration
+        }
+      }
+
       this.convertInMs = function (displaytime, unit) {
         var duration
         var unknownUnit = 'Unknown unit'
         if (displaytime) {
           switch (unit) {
-            case configUnitTime.seconds :
-              duration = displaytime * 1000
+            case unitTimeInProblemAdded.seconds :
+              duration = displaytime * timeInMs.seconds
               break
-            case configUnitTime.minutes :
-              duration = displaytime * 60000
+            case unitTimeInProblemAdded.minutes :
+              duration = displaytime * timeInMs.minutes
               break
-            case configUnitTime.hours :
-              duration = displaytime * 3600000
+            case unitTimeInProblemAdded.hours :
+              duration = displaytime * timeInMs.hours
               break
             default :
               throw unknownUnit
@@ -75,5 +87,5 @@
           return false
         }
       }
-    })
+    }])
 })();// eslint-disable-line semi

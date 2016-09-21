@@ -17,7 +17,6 @@
       'ALL-PROBLEMS-HEADER': 'LISTE DE PROBLEMES',
       'DOWNLOAD-CSV': 'DOWNLOAD CSV',
 
-
       'PATH-POSTE-DA': '/poste-da',
       'PATH-PROBLEMS': '/',
 

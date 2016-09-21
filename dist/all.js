@@ -26,28 +26,6 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myCreationInput', [
-    function () {
-      return {
-        restrict: 'E',
-        scope: {
-          val: '=val',
-          label: '@label',
-          onclick: '=onclick',
-          placeholder: '@placeholder'
-        },
-        templateUrl: '/component/creation-input/creation-input.html',
-        controller: function ($scope) {
-        }
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
   module.directive('myButton', ['CheckNumberService',
     function (CheckNumberService) {
       return {
@@ -90,6 +68,28 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
+  module.directive('myCreationInput', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          val: '=val',
+          label: '@label',
+          onclick: '=onclick',
+          placeholder: '@placeholder'
+        },
+        templateUrl: '/component/creation-input/creation-input.html',
+        controller: function ($scope) {
+        }
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
   module.directive('myCustomInput', [
     function () {
       return {
@@ -101,6 +101,37 @@
           placeholder: '@placeholder'
         },
         templateUrl: '/component/custom-input/custom-input.html'
+      }
+    }
+  ])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
+  module.directive('myCreationTypeProbleme', [
+    function () {
+      return {
+        restrict: 'E',
+        scope: {
+          valduree: '=valduree',
+          valtypeproblem: '=valtypeproblem',
+          labelduree: '@labelduree',
+          labeltypeproblem: '@labeltypeproblem',
+          onclick: '=onclick',
+          placeholderduree: '@placeholderduree',
+          placeholdertypeproblem: '@placeholdertypeproblem',
+          durationAdded: '=durationAdded',
+          unitAdded: '=unitAdded',
+          unit: '=unit'
+        },
+        templateUrl: '/component/creation-type-probleme/creation-type-probleme.html',
+        controller: ['$scope', 'TimeService', function ($scope, TimeService) {
+          $scope.retrievetime = function () {
+            $scope.durationAdded = TimeService.convertInMs($scope.valduree, $scope.unit)
+          }
+        }]
       }
     }
   ])
@@ -150,70 +181,16 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myCreationTypeProbleme', [
+  module.directive('myHeaderLink', [
     function () {
       return {
         restrict: 'E',
         scope: {
-          valduree: '=valduree',
-          valtypeproblem: '=valtypeproblem',
-          labelduree: '@labelduree',
-          labeltypeproblem: '@labeltypeproblem',
-          onclick: '=onclick',
-          placeholderduree: '@placeholderduree',
-          placeholdertypeproblem: '@placeholdertypeproblem',
-          durationAdded: '=durationAdded',
-          unitAdded: '=unitAdded',
-          unit: '=unit'
+          val: '=val',
+          label: '@label',
+          url: '@url'
         },
-        templateUrl: '/component/creation-type-probleme/creation-type-probleme.html',
-        controller: ['$scope', 'TimeService', function ($scope, TimeService) {
-          $scope.retrievetime = function () {
-            $scope.durationAdded = TimeService.convertInMs($scope.valduree, $scope.unit)
-          }
-        }]
-      }
-    }
-  ])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myHeader', [
-    function () {
-      return {
-        restrict: 'E',
-        templateUrl: 'component/header/header.html',
-        scope: {
-          headerTitle: '@headerTitle',
-          pathHeader: '@pathHeader'
-        },
-        controller: ['$scope', '$location', 'serverConnexion', function ($scope, $location, serverConnexion) {
-          var ressourceNameRetrieveCsv = 'CSV'
-          $scope.csvUrl = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameRetrieveCsv
-          $scope.valposteda = false
-          $scope.valproblems = false
-          $scope.vallistproblems = false
-          $scope.valallproblems = false
-          $scope.valcsv = false
-          if ($location.path() === '/poste-da') {
-            $scope.valposteda = true
-          }
-          if ($location.path() === '/types-problems') {
-            $scope.vallistproblems = true
-          }
-          if ($location.path() === '/') {
-            $scope.valproblems = true
-          }
-          if ($location.path() === '/all-problems') {
-            $scope.valallproblems = true
-          }
-        }],
-        link: function ($scope, element, attributes) {
-
-        }
+        templateUrl: '/component/header-link/header-link.html'
       }
     }
   ])
@@ -258,33 +235,39 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  module.directive('myPostesDa', [function () {
-    return {
-      restrict: 'E',
-      scope: {
-        postesDa: '=postesDa',
-        ondelete: '=ondelete',
-        itemId: '=idvalue'
-      },
-      templateUrl: '/component/list-poste-da/list-poste-da.html'
-    }
-  }])
-})();// eslint-disable-line semi
-
-(function () {
-  'use strict'
-  var module = angular.module('ProblemsTest')
-
-  module.directive('myHeaderLink', [
+  module.directive('myHeader', [
     function () {
       return {
         restrict: 'E',
+        templateUrl: 'component/header/header.html',
         scope: {
-          val: '=val',
-          label: '@label',
-          url: '@url'
+          headerTitle: '@headerTitle',
+          pathHeader: '@pathHeader'
         },
-        templateUrl: '/component/header-link/header-link.html'
+        controller: ['$scope', '$location', 'serverConnexion', function ($scope, $location, serverConnexion) {
+          var ressourceNameRetrieveCsv = 'CSV'
+          $scope.csvUrl = 'http://' + serverConnexion.server + ':' + serverConnexion.port + '/' + ressourceNameRetrieveCsv
+          $scope.valposteda = false
+          $scope.valproblems = false
+          $scope.vallistproblems = false
+          $scope.valallproblems = false
+          $scope.valcsv = false
+          if ($location.path() === '/poste-da') {
+            $scope.valposteda = true
+          }
+          if ($location.path() === '/types-problems') {
+            $scope.vallistproblems = true
+          }
+          if ($location.path() === '/') {
+            $scope.valproblems = true
+          }
+          if ($location.path() === '/all-problems') {
+            $scope.valallproblems = true
+          }
+        }],
+        link: function ($scope, element, attributes) {
+
+        }
       }
     }
   ])
@@ -1903,6 +1886,23 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
+  module.directive('myPostesDa', [function () {
+    return {
+      restrict: 'E',
+      scope: {
+        postesDa: '=postesDa',
+        ondelete: '=ondelete',
+        itemId: '=idvalue'
+      },
+      templateUrl: '/component/list-poste-da/list-poste-da.html'
+    }
+  }])
+})();// eslint-disable-line semi
+
+(function () {
+  'use strict'
+  var module = angular.module('ProblemsTest')
+
   module.directive('myRadiolistTypeProblems', [ function () {
     return {
       restrict: 'E',
@@ -1942,7 +1942,28 @@
     server: 'localhost'
   }
 
+  const configUnitTimeInProblemAdded = {
+    seconds: 's',
+    minutes: 'm',
+    hours: 'h'
+  }
+
+  const configUnitTimeInListProblemsDisplayed = {
+    seconds: 's',
+    minutes: 'm',
+    hours: 'h'
+  }
+
+  const timeInMs = {
+    seconds: 1000,
+    minutes: 60000,
+    hours: 3600000
+  }
+
   module.constant('serverConnexion', configConnexionServer)
+  module.constant('unitTimeInProblemAdded', configUnitTimeInProblemAdded)
+  module.constant('unitTimeInListProblemsDisplayed', configUnitTimeInListProblemsDisplayed)
+  module.constant('timeInMs', timeInMs)
 })();// eslint-disable-line semi
 
 (function () {
@@ -1991,7 +2012,6 @@
       'POSTES-DA-HEADER': 'POSTES',
       'ALL-PROBLEMS-HEADER': 'LISTE DE PROBLEMES',
       'DOWNLOAD-CSV': 'DOWNLOAD CSV',
-
 
       'PATH-POSTE-DA': '/poste-da',
       'PATH-PROBLEMS': '/',
@@ -2594,14 +2614,8 @@
   'use strict'
   var module = angular.module('ProblemsTest')
 
-  var configUnitTime = {
-    seconds: 's',
-    minutes: 'm',
-    hours: 'h'
-  }
-
   module.service('TimeService',
-    function () {
+    ['unitTimeInProblemAdded', 'timeInMs', function (unitTimeInProblemAdded, timeInMs) {
       this.getTimeUnit = function (duration) {
         var unit
         var invalidDuration = 'Duration is invalid'
@@ -2610,11 +2624,11 @@
         }
 
         if (duration < 59999) {
-          unit = configUnitTime.seconds
+          unit = unitTimeInProblemAdded.seconds
         } else if (duration < 3599999) {
-          unit = configUnitTime.minutes
+          unit = unitTimeInProblemAdded.minutes
         } else {
-          unit = configUnitTime.hours
+          unit = unitTimeInProblemAdded.hours
         }
         return unit
       }
@@ -2623,14 +2637,14 @@
         var displaytime
         var unknowUnit = 'Unknown unit'
         switch (unit) {
-          case configUnitTime.seconds :
-            displaytime = Math.ceil(duration / 1000)
+          case unitTimeInProblemAdded.seconds :
+            displaytime = Math.ceil(duration / timeInMs.seconds)
             break
-          case configUnitTime.minutes :
-            displaytime = Math.ceil(duration / 60000)
+          case unitTimeInProblemAdded.minutes :
+            displaytime = Math.ceil(duration / timeInMs.minutes)
             break
-          case configUnitTime.hours :
-            displaytime = Math.ceil(duration / 3600000)
+          case unitTimeInProblemAdded.hours :
+            displaytime = Math.ceil(duration / timeInMs.hours)
             break
           default :
             throw unknowUnit
@@ -2638,19 +2652,37 @@
         return displaytime
       }
 
+      this.getTimeAccordingToUnit = function (duration) {
+        var reste
+
+        var hourDuration = Math.floor(duration / timeInMs.hours)
+        reste = duration % timeInMs.hours
+
+        var minuteDuration = Math.floor(reste / timeInMs.minutes)
+        reste = reste % timeInMs.minutes
+
+        var secondDuration = Math.round(reste / timeInMs.seconds)
+
+        return {
+          hours: hourDuration,
+          minutes: minuteDuration,
+          seconds: secondDuration
+        }
+      }
+
       this.convertInMs = function (displaytime, unit) {
         var duration
         var unknownUnit = 'Unknown unit'
         if (displaytime) {
           switch (unit) {
-            case configUnitTime.seconds :
-              duration = displaytime * 1000
+            case unitTimeInProblemAdded.seconds :
+              duration = displaytime * timeInMs.seconds
               break
-            case configUnitTime.minutes :
-              duration = displaytime * 60000
+            case unitTimeInProblemAdded.minutes :
+              duration = displaytime * timeInMs.minutes
               break
-            case configUnitTime.hours :
-              duration = displaytime * 3600000
+            case unitTimeInProblemAdded.hours :
+              duration = displaytime * timeInMs.hours
               break
             default :
               throw unknownUnit
@@ -2667,7 +2699,7 @@
           return false
         }
       }
-    })
+    }])
 })();// eslint-disable-line semi
 
 (function () {
@@ -2731,14 +2763,26 @@
 (function () {
   'use strict'
   var module = angular.module('ProblemsTest')
+
   module.filter('timeDisplayed',
-    ['TimeService',
-      function (TimeService) {
+    ['TimeService', 'unitTimeInListProblemsDisplayed',
+      function (TimeService, unitTimeInListProblemsDisplayed) {
         return function (element) {
-          var unit = TimeService.getTimeUnit(element)
-          var displaytime = TimeService.computeDisplayTime(element, unit)
-          var entiretime = displaytime + unit
-          return entiretime
+          var timeTable = TimeService.getTimeAccordingToUnit(element)
+          var displaytime = ''
+          if (timeTable.hours) {
+            var timeHour = timeTable.hours + unitTimeInListProblemsDisplayed.hours
+            displaytime = displaytime + timeHour
+          }
+          if (timeTable.minutes) {
+            var timeMinute = timeTable.minutes + unitTimeInListProblemsDisplayed.minutes
+            displaytime = displaytime + timeMinute
+          }
+          if (timeTable.seconds) {
+            var timeSecond = timeTable.seconds + unitTimeInListProblemsDisplayed.seconds
+            displaytime = displaytime + timeSecond
+          }
+          return displaytime
         }
       }
     ]
